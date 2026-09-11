@@ -171,6 +171,26 @@
       "remote_after_sha256": "7cdaf6c4e61ce1818e997291a47041c5286b980db9f59d7866d70dd8532bc499",
       "decoded": "pi-foo-dhcp/lesson-02-dry-run_nm-request_pi-foo-dhcp.tsv",
       "frames": 27
+    },
+    {
+      "host": "pi-foo-02",
+      "source": "/home/pi/cap/lesson-02-dry-run_lease-change_pi-foo-02.pcapng",
+      "size": 2636,
+      "sha256": "c336d5563c7a8f23a6f3ae6b8c4fcbc47b867a8ff02503a0dcba770f10cd3636",
+      "local": "pi-foo-02/lesson-02-dry-run_lease-change_pi-foo-02.pcapng",
+      "remote_after_sha256": "c336d5563c7a8f23a6f3ae6b8c4fcbc47b867a8ff02503a0dcba770f10cd3636",
+      "decoded": "pi-foo-02/lesson-02-dry-run_lease-change_pi-foo-02.tsv",
+      "frames": 13
+    },
+    {
+      "host": "pi-foo-02",
+      "source": "/home/pi/cap/lesson-02-dry-run_lease-change-again_pi-foo-02.pcapng",
+      "size": 2192,
+      "sha256": "6e438afebbf2ad09eaca35f97238b2ca0e72bbfd29e3f0f67606124570615fa7",
+      "local": "pi-foo-02/lesson-02-dry-run_lease-change-again_pi-foo-02.pcapng",
+      "remote_after_sha256": "6e438afebbf2ad09eaca35f97238b2ca0e72bbfd29e3f0f67606124570615fa7",
+      "decoded": "pi-foo-02/lesson-02-dry-run_lease-change-again_pi-foo-02.tsv",
+      "frames": 8
     }
   ],
   "decoded_with": "TShark (Wireshark) 4.6.6 (Git commit 3a22c3ef473d)."

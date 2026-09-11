@@ -15,3 +15,5 @@ b54be732d911d000f27c07dca098cab67ebe81c200c797a41e90e177acfc4d8e  pi-foo-01/less
 69516e190220ed98093e8999c5cd2c8ff30adc681a0912defcf61804075ffc63  pi-foo-dhcp/lesson-02-dry-run_dhcp_pi-foo-dhcp.pcapng
 84712a3183b152396c7d0ce5b15a5745e2dec84f7ecb2c865d942fe7e877da50  pi-foo-dhcp/lesson-02-dry-run_e2e_pi-foo-dhcp.pcapng
 7cdaf6c4e61ce1818e997291a47041c5286b980db9f59d7866d70dd8532bc499  pi-foo-dhcp/lesson-02-dry-run_nm-request_pi-foo-dhcp.pcapng
+c336d5563c7a8f23a6f3ae6b8c4fcbc47b867a8ff02503a0dcba770f10cd3636  pi-foo-02/lesson-02-dry-run_lease-change_pi-foo-02.pcapng
+6e438afebbf2ad09eaca35f97238b2ca0e72bbfd29e3f0f67606124570615fa7  pi-foo-02/lesson-02-dry-run_lease-change-again_pi-foo-02.pcapng

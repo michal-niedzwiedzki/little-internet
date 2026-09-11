@@ -1,0 +1,14 @@
+frame.number	frame.time_relative	_ws.col.def_src	_ws.col.def_dst	_ws.col.protocol	_ws.col.info	dhcp.id	dhcp.option.dhcp	dhcp.hw.mac_addr	dhcp.option.requested_ip_address	dhcp.ip.your
+1	0.000000000	3c:78:95:3e:f4:62	ff:ff:ff:ff:ff:ff	ARP	Who has 10.10.0.254? Tell 10.10.0.253					
+2	15.971162101	0.0.0.0	255.255.255.255	DHCP	DHCP Discover - Transaction ID 0x65ab3865	0x65ab3865	1	b8:27:eb:7d:e8:ee	10.10.0.8	0.0.0.0
+3	15.972348786	10.10.0.254	10.10.0.2	DHCP	DHCP Offer    - Transaction ID 0x65ab3865	0x65ab3865	2	b8:27:eb:7d:e8:ee		10.10.0.2
+4	15.972652579	0.0.0.0	255.255.255.255	DHCP	DHCP Request  - Transaction ID 0x65ab3865	0x65ab3865	3	b8:27:eb:7d:e8:ee	10.10.0.8	0.0.0.0
+5	15.980055124	10.10.0.254	10.10.0.8	DHCP	DHCP ACK      - Transaction ID 0x65ab3865	0x65ab3865	5	b8:27:eb:7d:e8:ee		10.10.0.8
+6	16.018309686	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.8					
+7	18.018431155	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.8					
+8	20.018709222	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.8					
+9	21.107146535	b8:27:eb:ba:c7:ba	b8:27:eb:7d:e8:ee	ARP	Who has 10.10.0.8? Tell 10.10.0.254					
+10	21.107219449	b8:27:eb:7d:e8:ee	b8:27:eb:ba:c7:ba	ARP	10.10.0.8 is at b8:27:eb:7d:e8:ee					
+11	21.107148514	b8:27:eb:ba:c7:ba	b8:27:eb:7d:e8:ee	ARP	Who has 10.10.0.2? Tell 10.10.0.254					
+12	22.131142098	b8:27:eb:ba:c7:ba	b8:27:eb:7d:e8:ee	ARP	Who has 10.10.0.2? Tell 10.10.0.254					
+13	23.155105550	b8:27:eb:ba:c7:ba	b8:27:eb:7d:e8:ee	ARP	Who has 10.10.0.2? Tell 10.10.0.254					

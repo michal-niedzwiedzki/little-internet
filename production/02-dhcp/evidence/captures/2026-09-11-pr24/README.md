@@ -1,7 +1,7 @@
 # PR #24 fresh-image test captures — 2026-09-11
 
 Archived from `/home/pi/cap/` on all three Pis after Joel's dry run and coached
-recovery. All 17 files decode successfully. For every file, the remote hash
+recovery. All 19 files decode successfully. For every file, the remote hash
 before copying, local hash, and remote hash after copying matched. Originals
 remain on the Pis; these are stable copied snapshots, not a claim that every
 capture process had been stopped.
@@ -38,7 +38,8 @@ SHA-256: `e0434890addceab35dad9e1e7b5dcddec9cbad3daebcc2455d1c6258ceee2025`
   Request asks for .2, and ACK assigns .2. The e2e server capture's transaction
   0x38ee227f (frames 53/60/61/62) shows the same pattern. Do not describe these
   as an Offer of .2. These packets alone do not establish whether the server's
-  lease file was preserved before each attempt; that remains a controlled test.
+  lease file was preserved before each attempt; the separate controlled test
+  below establishes that procedure.
 - **The duplicate .2 is captured.** Pi 01's `lesson-02-dry-arping-fix` contains
   four broadcast requests (1/4/7/10), each answered by Pi 02 and the switch.
   This file has 12 frames; Joel's pasted arping terminal output counted five
@@ -51,8 +52,8 @@ SHA-256: `e0434890addceab35dad9e1e7b5dcddec9cbad3daebcc2455d1c6258ceee2025`
   the matching echo request/reply in frames 1–2, followed by ARP exchanges.
 
 The [test notes](../../../fresh-image-test.md) retain the commands, user reports,
-and limits. Switch .253 persistence across power cycling and the controlled
-arbitrary-lease-to-preferred-address transition remain unverified.
+and limits. Switch .253 persistence across power cycling remains unverified.
+The controlled preference transition is now verified, as recorded below.
 
 ## Files
 
@@ -75,3 +76,32 @@ arbitrary-lease-to-preferred-address transition remain unverified.
 | pi-foo-dhcp | [lesson-02-dry-run_dhcp_pi-foo-dhcp.pcapng](pi-foo-dhcp/lesson-02-dry-run_dhcp_pi-foo-dhcp.pcapng) | 83 | [TSV](pi-foo-dhcp/lesson-02-dry-run_dhcp_pi-foo-dhcp.tsv) |
 | pi-foo-dhcp | [lesson-02-dry-run_e2e_pi-foo-dhcp.pcapng](pi-foo-dhcp/lesson-02-dry-run_e2e_pi-foo-dhcp.pcapng) | 119 | [TSV](pi-foo-dhcp/lesson-02-dry-run_e2e_pi-foo-dhcp.tsv) |
 | pi-foo-dhcp | [lesson-02-dry-run_nm-request_pi-foo-dhcp.pcapng](pi-foo-dhcp/lesson-02-dry-run_nm-request_pi-foo-dhcp.pcapng) | 27 | [TSV](pi-foo-dhcp/lesson-02-dry-run_nm-request_pi-foo-dhcp.tsv) |
+
+## Controlled preference transition
+
+Joel ran this follow-up on Pi 02 without reflashing, restarting dnsmasq, or
+manually clearing its lease file. Starting from a confirmed .2 lease, he set
+an explicit .8 preference, restarted the NetworkManager-managed client after
+removing its local lease file, and confirmed .8 alone on the interface and in
+the server's lease record. He then repeated with the preference set to .2.
+The final interface, OLED, and server lease record all agreed on .2.
+These state checks are Joel's reports; the packet fields below were independently
+decoded from the archived files. Preserving the server file does not mean its
+contents stayed unchanged: dnsmasq updated its lease records during the test.
+
+| Capture | Frames | Decoded fields |
+| --- | ---: | --- |
+| [Move to .8](pi-foo-02/lesson-02-dry-run_lease-change_pi-foo-02.pcapng) | 13 | [TSV](pi-foo-02/lesson-02-dry-run_lease-change_pi-foo-02.tsv) |
+| [Return to .2](pi-foo-02/lesson-02-dry-run_lease-change-again_pi-foo-02.pcapng) | 8 | [TSV](pi-foo-02/lesson-02-dry-run_lease-change-again_pi-foo-02.tsv) |
+
+- Move to .8: transaction `0x65ab3865`, DORA frames 2–5. Discover and Request
+  option 50 contain .8; Offer `yiaddr` is .2; ACK `yiaddr` is .8. First address
+  announcement is frame 6.
+- Return to .2: transaction `0x45862853`, DORA frames 1–4. Discover and Request
+  option 50 contain .2; Offer `yiaddr` is .8; ACK `yiaddr` is .2. First address
+  announcement is frame 5. The archive also retains frame 8, a third announcement
+  not included in the seven-frame terminal excerpt Joel initially pasted.
+
+This demonstrates the behavior of this configured client/server combination;
+it is not a general claim that clients always request a different address from
+the Offer or that a server must honor a preference.

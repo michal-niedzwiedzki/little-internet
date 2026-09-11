@@ -5,6 +5,22 @@ supporting work are committed and pushed; publication review and video
 preparation are next. Old-cut transcript and sampled-picture review are complete,
 but continuous playback/listening remain pending. No Resolve timeline edited.
 
+## Latest checkpoint — controlled preference transition verified
+
+The follow-up test succeeded on the existing Pi 02: .2 → .8 → .2, with full
+DORA each time, no manual dnsmasq lease clearing, and final interface/OLED/server
+record agreement. Both new files are archived and hash-verified; the September
+11 archive now contains 19 captures. See
+[fresh-image-test.md](fresh-image-test.md#controlled-preference-transition-verified--2026-09-11)
+and the [archive](evidence/captures/2026-09-11-pr24/README.md#controlled-preference-transition).
+
+Next editorial checkpoint: explain B07's observed alternative (Offer of the
+old address, Request/ACK of the preferred one). The September 9 example really
+offers .2, so preserve its raw evidence and either add the separate follow-up
+or replace the example consistently. No diary rewrite was made during archival.
+Fresh Neovim-artifact and switch persistence checks remain separate; the earlier
+build status below is historical and has not been refreshed in this checkpoint.
+
 ## Latest checkpoint — evidence archived and PR #24 refreshed
 
 All 17 new captures are archived, hash-verified, decoded, and pushed in

@@ -297,3 +297,70 @@ new CI artifact and a subsequent `nvim --version` check on that image. Existing
 networking results apply to the earlier tested candidate, not to a freshly
 booted Neovim build. The workstation SSH-reset utility was added separately;
 its hardware execution has not been established by this coaching session.
+
+
+### Controlled preference transition verified — 2026-09-11
+
+Joel completed this on the existing Pi 02, with Ethernet connected and Wi-Fi
+SSH available. No reflash, server restart, or manual server lease-file deletion
+was performed. Pi 01 and the switch configuration were left as they were.
+
+Starting state: Pi 02 had exactly 10.10.0.2/24. The server lease file listed
+Pi 02 at .2 and Pi 01 at .1. A broadcast ARP probe from Pi 01 for .8 returned
+no replies. Joel changed `/etc/NetworkManager/dhclient-eth0.conf` to
+`send dhcp-requested-address 10.10.0.8;`, started a capture, and ran:
+
+```bash
+sudo nmcli connection down eth-dhcp
+lease_uuid=$(nmcli -g connection.uuid connection show eth-dhcp)
+sudo rm -f "/var/lib/NetworkManager/dhclient-${lease_uuid}-eth0.lease"
+sudo nmcli connection up eth-dhcp
+```
+
+Joel confirmed .2 was gone, the interface held only .8, and the server recorded
+only .8 for Pi 02. He then changed the preference to .2, started a fresh capture,
+and repeated those same commands. He inspected option 50 and `Your (client) IP
+address` with `tshark -n -r ... -Y 'dhcp.id == 0x45862853' -O dhcp`.
+Finally he confirmed .2 alone on the interface, .2 on the OLED, and only .2 in
+the server's record for Pi 02. No raw terminal output for these final state
+checks was pasted; these are user-confirmed observations.
+
+Both captures are now archived with matching remote-before/local/remote-after
+SHA-256 hashes and complete TSV decodes in the
+[controlled-transition archive](evidence/captures/2026-09-11-pr24/README.md#controlled-preference-transition).
+Verbatim contiguous DHCP rows from each decoded TSV follow; the header records
+the field order. Non-DHCP rows are omitted here and retained in each TSV.
+
+`lesson-02-dry-run_lease-change_pi-foo-02.pcapng`:
+
+```text
+frame.number	frame.time_relative	_ws.col.def_src	_ws.col.def_dst	_ws.col.protocol	_ws.col.info	dhcp.id	dhcp.option.dhcp	dhcp.hw.mac_addr	dhcp.option.requested_ip_address	dhcp.ip.your
+2	15.971162101	0.0.0.0	255.255.255.255	DHCP	DHCP Discover - Transaction ID 0x65ab3865	0x65ab3865	1	b8:27:eb:7d:e8:ee	10.10.0.8	0.0.0.0
+3	15.972348786	10.10.0.254	10.10.0.2	DHCP	DHCP Offer    - Transaction ID 0x65ab3865	0x65ab3865	2	b8:27:eb:7d:e8:ee		10.10.0.2
+4	15.972652579	0.0.0.0	255.255.255.255	DHCP	DHCP Request  - Transaction ID 0x65ab3865	0x65ab3865	3	b8:27:eb:7d:e8:ee	10.10.0.8	0.0.0.0
+5	15.980055124	10.10.0.254	10.10.0.8	DHCP	DHCP ACK      - Transaction ID 0x65ab3865	0x65ab3865	5	b8:27:eb:7d:e8:ee		10.10.0.8
+```
+
+`lesson-02-dry-run_lease-change-again_pi-foo-02.pcapng`:
+
+```text
+frame.number	frame.time_relative	_ws.col.def_src	_ws.col.def_dst	_ws.col.protocol	_ws.col.info	dhcp.id	dhcp.option.dhcp	dhcp.hw.mac_addr	dhcp.option.requested_ip_address	dhcp.ip.your
+1	0.000000000	0.0.0.0	255.255.255.255	DHCP	DHCP Discover - Transaction ID 0x45862853	0x45862853	1	b8:27:eb:7d:e8:ee	10.10.0.2	0.0.0.0
+2	0.001193462	10.10.0.254	10.10.0.8	DHCP	DHCP Offer    - Transaction ID 0x45862853	0x45862853	2	b8:27:eb:7d:e8:ee		10.10.0.8
+3	0.001509184	0.0.0.0	255.255.255.255	DHCP	DHCP Request  - Transaction ID 0x45862853	0x45862853	3	b8:27:eb:7d:e8:ee	10.10.0.2	0.0.0.0
+4	0.008845945	10.10.0.254	10.10.0.2	DHCP	DHCP ACK      - Transaction ID 0x45862853	0x45862853	5	b8:27:eb:7d:e8:ee		10.10.0.2
+```
+
+Result: the controlled .8-to-.2 preference transition is verified with full
+DORA and no manual server lease reset. In both directions, the Offer contains
+the previous address, while Discover and Request contain the configured new
+preference and ACK grants it. This supersedes the earlier pending-test note.
+Do not infer that all clients behave this way or that preferences are guaranteed.
+
+Publication follow-up: accommodate this observed alternative in B07's prose.
+The diary's September 9 capture actually offers .2 and remains accurate for that
+recording; do not rewrite its raw rows to match this new test or describe its
+Offer as .8. The earlier suggestion to simply change that description was too
+broad. Explain the alternative with this separate capture, or deliberately
+replace the example and all matching references together. No diary text was
+changed while archiving this test.
