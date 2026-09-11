@@ -5,6 +5,9 @@ headless **Raspberry Pi OS Lite** with the networking tools the lessons need
 already installed, like `tcpdump`, `tshark`, `arping`, `ethtool`, and
 VLAN/bridge tooling.
 
+The current image source also includes Neovim (`nvim`) for editing lesson
+configuration on the node; the next image build installs it automatically.
+
 ## Quickstart: flash a prebuilt image
 
 Download the image, write it to a microSD card, then edit one text file on the
@@ -89,6 +92,10 @@ file in place so you can fix it and reboot.
   once and key-based auth takes over: `ssh-copy-id pi@<hostname>.local` (enter
   the password one last time). After that, `ssh pi@<hostname>.local` logs in
   with no prompt.
+- Reflashed your lab Pis? Run `./tools/reset-ssh.sh` from the repo root on your
+  workstation to refresh saved host keys and copy your public key to all three
+  nodes. See [the SSH reset utility](../tools/README.md#restore-ssh-after-reflashing)
+  for defaults, custom hosts, and a dry run.
 - Confirm the networking tools are present: `which tcpdump tshark arping`.
 - Check the I2C bus (for the OLED): `i2cdetect -y 1`.
 - If an OLED is wired up, it shows the node's identity from boot — hostname in
@@ -110,6 +117,63 @@ file in place so you can fix it and reboot.
 ---
 
 ## Building the image yourself
+
+### DHCP client baseline
+
+The current image source explicitly installs `isc-dhcp-client` and configures
+NetworkManager to use `dhclient` through
+`/etc/NetworkManager/conf.d/20-little-internet-dhcp-client.conf`. NetworkManager
+continues to own the interfaces, launch the DHCP clients, and apply their
+leases. Use `nmcli` to activate connections; do not also launch a standalone
+`dhclient` on an interface managed by NetworkManager.
+
+This is the baseline for the repository's Bookworm image, tested on its
+NetworkManager 1.42.4. The backend selection applies to Wi-Fi as well as
+Ethernet. The previously published v0.5.3 image used the internal backend;
+these source changes require a new build and release to reach downloaded images.
+
+The shared image does not request a particular lab address. During the DHCP
+lesson, a client can add an Ethernet-specific preference, for example on Pi 02:
+
+```conf
+# /etc/NetworkManager/dhclient-eth0.conf
+on transmission {
+    if config-option dhcp-message-type = 01 {
+        send dhcp-requested-address 10.10.0.2;
+    }
+}
+```
+
+The condition sends the preference only in Discover (`01`), leaving dhclient
+to request the address selected from the server's Offer. Use `10.10.0.1` for Pi 01.
+Replace any existing unconditional `send dhcp-requested-address` line.
+
+Keep that preference out of global `/etc/dhcp/dhclient.conf`, where it could
+also affect management Wi-Fi. The server decides whether to grant a requested
+address; an existing lease does not change merely because this file is edited.
+The server can still offer the client's existing lease. To test a change, first
+deactivate the client, then release only its old binding on the dnsmasq server
+with `dhcp_release` from `dnsmasq-utils`, using the address and MAC in that lease
+record. Clear the client's remembered lease before reactivating it for a new
+Discover exchange. Keep other clients' server records intact.
+
+### Live capture viewer
+
+The current image source installs `tsharkie` in `/usr/local/bin`, with `mawk`
+for immediate packet output and `less` for interactive viewing. It displays
+aligned live packet rows while saving the capture:
+
+```bash
+tsharkie first-dora.pcapng -f 'arp or (udp port 67 or udp port 68)'
+```
+
+Bare filenames go into `~/cap/`; reusing a filename overwrites that capture.
+Run it as the normal capture user, without sudo. See
+[the tool documentation](../tools/tsharkie/README.md) for options.
+Like the DHCP backend change, this requires a new build and release; it is
+not included in the previously published v0.5.3 image.
+
+### Build workflow
 
 Everything below is for changing what's in the image. If you just want to flash
 a node, the quickstart above is all you need.
@@ -134,13 +198,14 @@ image/
     │   ├── 00-debconf            Preseeds iperf3 to not autostart (keeps the build non-interactive).
     │   ├── 00-packages           apt packages to install (capture, ARP, VLAN, I2C…).
     │   ├── 01-run.sh             Enables the I2C bus for the SSD1306 OLED displays + adds the user to the i2c group.
-    │   ├── 02-run.sh             Installs eth0's DHCP baseline (eth-dhcp) + a pre-provisioned Wi-Fi connection, if generated.
+    │   ├── 02-run.sh             Installs the NM dhclient backend, eth0's DHCP profile, and optional pre-provisioned Wi-Fi.
     │   ├── 03-run.sh             Lets the user run tshark unprivileged, pre-creates ~/cap, and sets COLORTERM for colored output over SSH.
     │   ├── 04-run.sh             Builds /opt/little-internet/venv with luma.oled to drive the OLED displays.
     │   ├── 05-run.sh             Installs the OLED test scripts into ~/oled-test (staged from tools/oled-test by build.sh).
     │   ├── 06-run.sh             Installs the on-demand ARP-state OLED viewer into ~/arp-oled (staged from tools/arp-oled by build.sh).
     │   ├── 07-run.sh             Installs + enables the boot-time OLED status display, little-internet-oled.service (staged from tools/status-oled by build.sh).
-    │   └── files/                eth-dhcp.nmconnection + little-internet-oled.service (build.sh also stages oled-test/, arp-oled/, and status-oled/ here).
+    │   ├── 08-run.sh             Installs tsharkie on PATH (staged from tools/tsharkie by build.sh).
+    │   └── files/                NM backend config, eth-dhcp.nmconnection, little-internet-oled.service, and staged tools.
     ├── 01-firstboot-config/      First-boot hostname + Wi-Fi provisioner for flashed (released) images.
     │   ├── 00-run.sh             Installs the provisioner script, service, and boot-partition template.
     │   └── files/                The script, systemd unit, and little-internet.txt.example.
