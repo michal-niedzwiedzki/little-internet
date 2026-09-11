@@ -32,25 +32,6 @@ I also prepare the switch's management interface: in its IP settings, I disable 
 
 The image prepared for this diary includes [`tsharkie`](../tools/tsharkie/README.md), a little utility I made to make captures more readable. It also configures NetworkManager to use dhclient for DHCP. NetworkManager manages the interfaces throughout, and later, I'll configure the Pis to request particular addresses.
 
-[Download the v0.6.0 image](https://github.com/ngrok/little-internet/releases/download/v0.6.0/v0.6.0-little-internet.img.xz), then follow the [flashing instructions](../image/README.md).
-
-<details>
-<summary>Verify your download</summary>
-
-From the directory containing the downloaded file, run this on your computer before flashing:
-
-```shell
-shasum -a 256 v0.6.0-little-internet.img.xz
-```
-
-The SHA-256 should match the release asset's checksum:
-
-```text
-5d1f79bf1a60dac95b691fc2319cf497a70d4bde57ef3984c9a33a2b03a66c6a
-```
-
-</details>
-
 Every packet excerpt below links to its saved capture, recorded on `eth0`. The frame numbers match those files, and the times are seconds since the first packet in each capture, rounded to three decimal places. These captures preserve earlier runs, including traffic from when the switch still used DHCP; the setup and reset instructions reflect what I learned while testing the walkthrough.
 
 ### Time to test the switch
