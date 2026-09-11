@@ -1,0 +1,11 @@
+frame.number	frame.time_relative	_ws.col.def_src	_ws.col.def_dst	_ws.col.protocol	_ws.col.info	dhcp.id	dhcp.option.dhcp	dhcp.ip.client	dhcp.ip.your	dhcp.option.requested_ip_address	dhcp.option.dhcp_server_id	dhcp.option.ip_address_lease_time	dhcp.option.renewal_time_value
+1	0.000000000	0.0.0.0	255.255.255.255	DHCP	DHCP Discover - Transaction ID 0x178a7723	0x178a7723	1	0.0.0.0	0.0.0.0	10.10.0.2			
+2	0.001569969	10.10.0.254	10.10.0.2	DHCP	DHCP Offer    - Transaction ID 0x178a7723	0x178a7723	2	0.0.0.0	10.10.0.2		10.10.0.254	43200	21600
+3	0.001921380	0.0.0.0	255.255.255.255	DHCP	DHCP Request  - Transaction ID 0x178a7723	0x178a7723	3	0.0.0.0	0.0.0.0	10.10.0.2	10.10.0.254		
+4	0.015320047	10.10.0.254	10.10.0.2	DHCP	DHCP ACK      - Transaction ID 0x178a7723	0x178a7723	5	0.0.0.0	10.10.0.2		10.10.0.254	43200	21600
+5	0.052840282	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.2								
+6	0.169805266	3c:78:95:3e:f4:62	ff:ff:ff:ff:ff:ff	ARP	Who has 10.10.0.254? Tell 10.10.0.253								
+7	2.053070922	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.2								
+8	4.053373552	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.2								
+9	5.047971913	b8:27:eb:ba:c7:ba	b8:27:eb:7d:e8:ee	ARP	Who has 10.10.0.2? Tell 10.10.0.254								
+10	5.048040456	b8:27:eb:7d:e8:ee	b8:27:eb:ba:c7:ba	ARP	10.10.0.2 is at b8:27:eb:7d:e8:ee								

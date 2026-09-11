@@ -1,0 +1,18 @@
+frame.number	frame.time_relative	_ws.col.def_src	_ws.col.def_dst	_ws.col.protocol	_ws.col.info	dhcp.id	dhcp.option.dhcp	dhcp.ip.client	dhcp.ip.your	dhcp.option.requested_ip_address	dhcp.option.dhcp_server_id	dhcp.option.ip_address_lease_time	dhcp.option.renewal_time_value
+1	0.000000000	0.0.0.0	255.255.255.255	DHCP	DHCP Discover - Transaction ID 0x7f68687a	0x7f68687a	1	0.0.0.0	0.0.0.0	10.10.0.2		120	
+2	0.000810307	10.10.0.254	10.10.0.2	DHCP	DHCP Offer    - Transaction ID 0x7f68687a	0x7f68687a	2	0.0.0.0	10.10.0.2		10.10.0.254	120	60
+3	0.001753998	0.0.0.0	255.255.255.255	DHCP	DHCP Request  - Transaction ID 0x7f68687a	0x7f68687a	3	0.0.0.0	0.0.0.0	10.10.0.2	10.10.0.254	120	
+4	0.012127885	10.10.0.254	10.10.0.2	DHCP	DHCP ACK      - Transaction ID 0x7f68687a	0x7f68687a	5	0.0.0.0	10.10.0.2		10.10.0.254	120	60
+5	0.050660849	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.2								
+6	2.050948997	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.2								
+7	4.051102762	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.2								
+8	5.034093378	b8:27:eb:ba:c7:ba	b8:27:eb:7d:e8:ee	ARP	Who has 10.10.0.2? Tell 10.10.0.254								
+9	5.034579573	b8:27:eb:7d:e8:ee	b8:27:eb:ba:c7:ba	ARP	10.10.0.2 is at b8:27:eb:7d:e8:ee								
+10	17.421845973	3c:78:95:3e:f4:62	ff:ff:ff:ff:ff:ff	ARP	Who has 10.10.0.254? Tell 10.10.0.253								
+11	17.421907223	b8:27:eb:ba:c7:ba	3c:78:95:3e:f4:62	ARP	10.10.0.254 is at b8:27:eb:ba:c7:ba								
+12	54.643437000	10.10.0.2	10.10.0.254	DHCP	DHCP Request  - Transaction ID 0x7f68687a	0x7f68687a	3	10.10.0.2	0.0.0.0			120	
+13	54.649722112	10.10.0.254	10.10.0.2	DHCP	DHCP ACK      - Transaction ID 0x7f68687a	0x7f68687a	5	10.10.0.2	10.10.0.2		10.10.0.254	120	55
+14	59.650286761	b8:27:eb:7d:e8:ee	b8:27:eb:ba:c7:ba	ARP	Who has 10.10.0.254? Tell 10.10.0.2								
+15	59.650328219	b8:27:eb:ba:c7:ba	b8:27:eb:7d:e8:ee	ARP	10.10.0.254 is at b8:27:eb:ba:c7:ba								
+16	59.818081676	b8:27:eb:ba:c7:ba	b8:27:eb:7d:e8:ee	ARP	Who has 10.10.0.2? Tell 10.10.0.254								
+17	59.818633704	b8:27:eb:7d:e8:ee	b8:27:eb:ba:c7:ba	ARP	10.10.0.2 is at b8:27:eb:7d:e8:ee								

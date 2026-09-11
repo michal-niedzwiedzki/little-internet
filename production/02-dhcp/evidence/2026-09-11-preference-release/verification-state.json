@@ -1,0 +1,77 @@
+{
+  "captures": [
+    {
+      "host": "pi-foo-02",
+      "path": "/home/pi/cap/lesson-02-preference-setup-eight_pi-foo-02.pcapng",
+      "pid": 16221,
+      "interface": "eth0"
+    },
+    {
+      "host": "pi-foo-dhcp",
+      "path": "/home/pi/cap/lesson-02-preference-setup-release_pi-foo-dhcp.pcapng",
+      "pid": 15311,
+      "interface": "any"
+    },
+    {
+      "host": "pi-foo-02",
+      "path": "/home/pi/cap/lesson-02-preference-retained-eight_pi-foo-02.pcapng",
+      "pid": 16446,
+      "interface": "eth0"
+    },
+    {
+      "host": "pi-foo-02",
+      "path": "/home/pi/cap/lesson-02-preference-release-to-two_pi-foo-02.pcapng",
+      "pid": 16654,
+      "interface": "eth0"
+    },
+    {
+      "host": "pi-foo-dhcp",
+      "path": "/home/pi/cap/lesson-02-preference-release-to-two_pi-foo-dhcp.pcapng",
+      "pid": 15474,
+      "interface": "eth0"
+    },
+    {
+      "host": "pi-foo-02",
+      "path": "/home/pi/cap/lesson-02-preference-timed-renewal_pi-foo-02.pcapng",
+      "pid": 16860,
+      "interface": "eth0"
+    },
+    {
+      "host": "pi-foo-dhcp",
+      "path": "/home/pi/cap/lesson-02-preference-timed-renewal_pi-foo-dhcp.pcapng",
+      "pid": 15577,
+      "interface": "eth0"
+    },
+    {
+      "host": "pi-foo-02",
+      "path": "/home/pi/cap/lesson-02-preference-final-twelve-hours_pi-foo-02.pcapng",
+      "pid": 17198,
+      "interface": "eth0"
+    }
+  ],
+  "original_client_config": "on transmission {\n    if config-option dhcp-message-type = 01 {\n        send dhcp-requested-address 10.10.0.2;\n    }\n}\n",
+  "server_pid": "4532",
+  "initial_leases": "1789201574 b8:27:eb:7d:e8:ee 10.10.0.2 pi-foo-02 *\n1789192637 b8:27:eb:3a:e2:c8 10.10.0.1 pi-foo-01 *\n",
+  "setup_done": true,
+  "retained_done": true,
+  "transition_done": true,
+  "renewal_started": 1789158952.604277,
+  "renewal_captures": [
+    {
+      "host": "pi-foo-02",
+      "path": "/home/pi/cap/lesson-02-preference-timed-renewal_pi-foo-02.pcapng",
+      "pid": 16860,
+      "interface": "eth0"
+    },
+    {
+      "host": "pi-foo-dhcp",
+      "path": "/home/pi/cap/lesson-02-preference-timed-renewal_pi-foo-dhcp.pcapng",
+      "pid": 15577,
+      "interface": "eth0"
+    }
+  ],
+  "renewal_done": true,
+  "final_leases": "1789202228 b8:27:eb:7d:e8:ee 10.10.0.2 pi-foo-02 *\n1789192637 b8:27:eb:3a:e2:c8 10.10.0.1 pi-foo-01 *\n",
+  "final_server_pid": "4532",
+  "finalized": true
+}

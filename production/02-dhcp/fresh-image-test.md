@@ -396,3 +396,33 @@ See [raw transcripts and captures](evidence/2026-09-11-conditional-preference/RE
 Pi 02 now has the conditional config installed. Pi 01 was not reconfigured.
 Timed renewal and a new preferred assignment without a prior server binding
 remain untested. No diary/image/PR edits accompanied this hardware test.
+
+
+### Full preference transition and renewal verified — 2026-09-11
+
+At Joel's request, the agent verified the remaining sequence. A real .8 binding
+was established using the conditional hint. With the server retaining .8,
+client-only down/delete/up correctly returned .8 despite the Discover hint for
+.2. Then, with Pi 02 deactivated, `dhcp_release eth0 10.10.0.8
+b8:27:eb:7d:e8:ee` on pi-foo-dhcp removed only its old server binding. A fresh
+conditional exchange offered, requested, and ACKed .2 with a 12-hour lease.
+The interface and server record matched. dnsmasq-utils was installed on the
+server for this operation; no other package was upgraded or removed.
+
+An independent 120-second lease test captured an automatic renewal: Request
+used ciaddr .2 without option 50 or 54, and ACK extended .2. The temporary
+lease-time setting was removed and a final DORA restored a normal 12-hour .2
+lease. Pi 01 retained .1 and its server lease row stayed unchanged. dnsmasq's
+MainPID stayed 4532. Wi-Fi and switch configuration were not changed.
+
+[Full evidence](evidence/2026-09-11-preference-release/README.md) includes eight
+hash-verified captures, complete decodes, commands, intermediate lease records,
+and final configuration. The short-lease test verifies ordinary timed renewal;
+it does not claim we waited six hours on the default lease. The physical OLED
+was not inspected in this agent-run test.
+
+B07 now includes dnsmasq-utils, targeted release after client deactivation,
+and the matching normal-lease client/server captures. Image README guidance
+was aligned in both worktrees. This resolves the previously pending preference
+transition and renewal checks; image artifact and switch persistence checks
+remain separate.

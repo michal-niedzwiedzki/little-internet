@@ -7,6 +7,23 @@ automated audio transcript and sampled picture have now been inspected;
 listening and continuous playback remain pending. Historical interpretations
 still need checking.
 
+## Preference transition and renewal resolved — 2026-09-11
+
+Verified the full conditional .8-to-.2 transition with a targeted server-side
+release after client deactivation. A control without that release reacquired
+.8; the corrected sequence granted .2 through full DORA with a 12-hour lease.
+A separate accelerated lease test verified ordinary timed renewal without
+option 50. The test-only lease-time setting was removed, and Pi 02 finished
+with conditional .2 and a normal 12-hour lease. Pi 01's lease row and dnsmasq's
+PID were unchanged. See the [complete experiment](evidence/2026-09-11-preference-release/README.md).
+
+The supported release method is dnsmasq-utils' `dhcp_release`, run locally on
+the server with the inactive client's old address and MAC (plus client-id if
+present). It removes only that binding. The [upstream-authored manual](https://manpages.debian.org/bookworm/dnsmasq-utils/dhcp_release.1.en.html)
+describes its server-local operation. NetworkManager continues managing the
+client. B07 and the image README now account for this preparation and B07 uses
+the new verified capture. Earlier pending-test statements below are superseded.
+
 ## Conditional preference fallback verified — 2026-09-11
 
 The agent tested the candidate on Pi 02 with Joel's explicit authorization.

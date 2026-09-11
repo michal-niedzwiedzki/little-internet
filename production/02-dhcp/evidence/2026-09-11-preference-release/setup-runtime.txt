@@ -1,0 +1,77 @@
+$ pi-foo-02: cat /etc/NetworkManager/dhclient-eth0.conf
+on transmission {
+    if config-option dhcp-message-type = 01 {
+        send dhcp-requested-address 10.10.0.2;
+    }
+}
+
+$ pi-foo-dhcp: systemctl show dnsmasq -p MainPID --value
+4532
+
+$ pi-foo-dhcp: sudo cat /var/lib/misc/dnsmasq.leases
+1789201574 b8:27:eb:7d:e8:ee 10.10.0.2 pi-foo-02 *
+1789192637 b8:27:eb:3a:e2:c8 10.10.0.1 pi-foo-01 *
+
+$ pi-foo-01: sudo arping -b -I eth0 -c 3 10.10.0.8
+ARPING 10.10.0.8 from 10.10.0.1 eth0
+Sent 3 probes (3 broadcast(s))
+Received 0 response(s)
+
+$ pi-foo-02: start tshark capture /home/pi/cap/lesson-02-preference-setup-eight_pi-foo-02.pcapng on eth0
+16221
+
+$ pi-foo-dhcp: start tshark capture /home/pi/cap/lesson-02-preference-setup-release_pi-foo-dhcp.pcapng on any
+15311
+
+$ pi-foo-02: sudo nmcli -w 15 connection down eth-dhcp
+Connection 'eth-dhcp' successfully deactivated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/20)
+
+$ pi-foo-02: ip -j -4 addr show dev eth0
+[]
+
+$ pi-foo-02: ip -j -4 addr show dev eth0
+[]
+
+$ pi-foo-dhcp: sudo dhcp_release eth0 10.10.0.2 b8:27:eb:7d:e8:ee
+
+$ pi-foo-dhcp: sudo cat /var/lib/misc/dnsmasq.leases
+1789192637 b8:27:eb:3a:e2:c8 10.10.0.1 pi-foo-01 *
+
+$ pi-foo-02: sudo tee /etc/NetworkManager/dhclient-eth0.conf
+on transmission {
+    if config-option dhcp-message-type = 01 {
+        send dhcp-requested-address 10.10.0.8;
+    }
+}
+
+$ pi-foo-02: sudo rm -f /var/lib/NetworkManager/dhclient-ea4302a7-a8e0-43f3-8aae-d9bb45eed4db-eth0.lease
+
+$ pi-foo-02: sudo nmcli -w 20 connection up eth-dhcp
+Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/21)
+
+$ pi-foo-02: ip -j -4 addr show dev eth0
+[{"ifindex":2,"ifname":"eth0","flags":["BROADCAST","MULTICAST","UP","LOWER_UP"],"mtu":1500,"qdisc":"pfifo_fast","operstate":"UP","group":"default","txqlen":1000,"addr_info":[{"family":"inet","local":"10.10.0.8","prefixlen":24,"broadcast":"10.10.0.255","scope":"global","dynamic":true,"noprefixroute":true,"label":"eth0","valid_life_time":43200,"preferred_life_time":43200}]}]
+
+$ pi-foo-dhcp: sudo cat /var/lib/misc/dnsmasq.leases
+1789202063 b8:27:eb:7d:e8:ee 10.10.0.8 pi-foo-02 *
+1789192637 b8:27:eb:3a:e2:c8 10.10.0.1 pi-foo-01 *
+
+$ pi-foo-02: stop own capture /home/pi/cap/lesson-02-preference-setup-eight_pi-foo-02.pcapng
+
+$ pi-foo-dhcp: stop own capture /home/pi/cap/lesson-02-preference-setup-release_pi-foo-dhcp.pcapng
+
+$ pi-foo-02: tshark -n -r /home/pi/cap/lesson-02-preference-setup-eight_pi-foo-02.pcapng -Y dhcp -T fields -E header=y -e frame.number -e frame.time_relative -e dhcp.option.dhcp -e dhcp.id -e dhcp.ip.client -e dhcp.ip.your -e dhcp.option.requested_ip_address -e dhcp.option.dhcp_server_id -e dhcp.option.ip_address_lease_time -e dhcp.option.renewal_time_value
+frame.number	frame.time_relative	dhcp.option.dhcp	dhcp.id	dhcp.ip.client	dhcp.ip.your	dhcp.option.requested_ip_address	dhcp.option.dhcp_server_id	dhcp.option.ip_address_lease_time	dhcp.option.renewal_time_value
+1	0.000000000	1	0x62f4cc3c	0.0.0.0	0.0.0.0	10.10.0.8			
+6	3.005210342	2	0x62f4cc3c	0.0.0.0	10.10.0.8		10.10.0.254	43200	21600
+7	3.005593525	3	0x62f4cc3c	0.0.0.0	0.0.0.0	10.10.0.8	10.10.0.254		
+8	3.015439977	5	0x62f4cc3c	0.0.0.0	10.10.0.8		10.10.0.254	43200	21600
+
+$ pi-foo-dhcp: tshark -n -r /home/pi/cap/lesson-02-preference-setup-release_pi-foo-dhcp.pcapng -Y dhcp -T fields -E header=y -e frame.number -e frame.time_relative -e dhcp.option.dhcp -e dhcp.id -e dhcp.ip.client -e dhcp.ip.your -e dhcp.option.requested_ip_address -e dhcp.option.dhcp_server_id -e dhcp.option.ip_address_lease_time -e dhcp.option.renewal_time_value
+frame.number	frame.time_relative	dhcp.option.dhcp	dhcp.id	dhcp.ip.client	dhcp.ip.your	dhcp.option.requested_ip_address	dhcp.option.dhcp_server_id	dhcp.option.ip_address_lease_time	dhcp.option.renewal_time_value
+1	0.000000000	7	0x00000000	10.10.0.2	0.0.0.0		10.10.0.254		
+2	3.297212690	1	0x62f4cc3c	0.0.0.0	0.0.0.0	10.10.0.8			
+7	6.301801931	2	0x62f4cc3c	0.0.0.0	10.10.0.8		10.10.0.254	43200	21600
+8	6.302769998	3	0x62f4cc3c	0.0.0.0	0.0.0.0	10.10.0.8	10.10.0.254		
+9	6.311983739	5	0x62f4cc3c	0.0.0.0	10.10.0.8		10.10.0.254	43200	21600
+

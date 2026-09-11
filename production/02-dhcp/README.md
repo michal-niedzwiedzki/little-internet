@@ -15,6 +15,7 @@ workflow. The outline is a proposal; the research and scripts are unfinished.
 | [diary.md](diary.md) | New observations, explanations, and display needs |
 | [diary-video-notes.md](diary-video-notes.md) | Four original video directions preserved verbatim from the diary |
 | [fresh-image-test.md](fresh-image-test.md) | PR #24 candidate identity, fresh-image test notes, and sharp edges |
+| [Preference transition verification](evidence/2026-09-11-preference-release/README.md) | Targeted lease release, conditional .8-to-.2 DORA, timed renewal, and eight verified captures |
 | [Fresh-image evidence](evidence/captures/2026-09-11-pr24/README.md) | Nineteen verified dry-run/recovery and preference-transition captures, decoded fields, and candidate checksum |
 | [publication-and-filming.md](publication-and-filming.md) | Review of the completed draft and separate paths to diary publication and filming |
 | [Fresh captures](evidence/captures/2026-09-09/README.md) | Eleven captures from the three Pis, in diary order, with source paths and verified checksums |

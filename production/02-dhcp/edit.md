@@ -5,6 +5,26 @@ supporting work are committed and pushed; publication review and video
 preparation are next. Old-cut transcript and sampled-picture review are complete,
 but continuous playback/listening remain pending. No Resolve timeline edited.
 
+## Latest checkpoint — full B07 transition verified and aligned
+
+Verified a real .8-to-.2 transition with conditional Discover preference and
+targeted release of Pi 02's old server binding. The control retained .8 without
+release. A separate timed renewal passed without option 50. Final state: Pi 02
+at .2 with its conditional preference and a normal 12-hour lease; Pi 01 at .1,
+its configuration unchanged. Installed dnsmasq-utils on the server; dnsmasq
+was not restarted and Pi 01's server lease record remained unchanged.
+
+Eight captures and raw transcripts are archived in
+[the experiment](evidence/2026-09-11-preference-release/README.md). Updated B07's
+installation/reset instructions and replaced its preference tables/links with
+the verified normal-lease captures, preserving the older archive. Aligned the
+image README guidance in both worktrees. The remaining B07 transition/renewal
+checks are resolved; do not ask Joel to repeat them without new evidence.
+
+Separate release checks remain: Neovim artifact verification, switch static-IP
+persistence, and the workstation SSH utility's hardware check. No image build,
+merge, release tag, or publication occurred in this test.
+
 ## Latest checkpoint — conditional example added to publication docs
 
 At Joel's request, replaced the unconditional requested-address example in

@@ -1,0 +1,8 @@
+frame.number	frame.time_relative	_ws.col.def_src	_ws.col.def_dst	_ws.col.protocol	_ws.col.info	dhcp.id	dhcp.option.dhcp	dhcp.ip.client	dhcp.ip.your	dhcp.option.requested_ip_address	dhcp.option.dhcp_server_id	dhcp.option.ip_address_lease_time	dhcp.option.renewal_time_value
+1	0.000000000	0.0.0.0	255.255.255.255	DHCP	DHCP Discover - Transaction ID 0x72ff5326	0x72ff5326	1	0.0.0.0	0.0.0.0	10.10.0.2			
+2	0.001414813	10.10.0.254	10.10.0.8	DHCP	DHCP Offer    - Transaction ID 0x72ff5326	0x72ff5326	2	0.0.0.0	10.10.0.8		10.10.0.254	43200	21600
+3	0.001759349	0.0.0.0	255.255.255.255	DHCP	DHCP Request  - Transaction ID 0x72ff5326	0x72ff5326	3	0.0.0.0	0.0.0.0	10.10.0.8	10.10.0.254		
+4	0.009589727	10.10.0.254	10.10.0.8	DHCP	DHCP ACK      - Transaction ID 0x72ff5326	0x72ff5326	5	0.0.0.0	10.10.0.8		10.10.0.254	43200	21600
+5	0.049485062	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.8								
+6	2.049673872	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.8								
+7	4.049855751	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.8								

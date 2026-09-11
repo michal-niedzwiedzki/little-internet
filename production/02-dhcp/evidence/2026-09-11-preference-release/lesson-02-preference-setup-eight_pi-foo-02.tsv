@@ -1,0 +1,12 @@
+frame.number	frame.time_relative	_ws.col.def_src	_ws.col.def_dst	_ws.col.protocol	_ws.col.info	dhcp.id	dhcp.option.dhcp	dhcp.ip.client	dhcp.ip.your	dhcp.option.requested_ip_address	dhcp.option.dhcp_server_id	dhcp.option.ip_address_lease_time	dhcp.option.renewal_time_value
+1	0.000000000	0.0.0.0	255.255.255.255	DHCP	DHCP Discover - Transaction ID 0x62f4cc3c	0x62f4cc3c	1	0.0.0.0	0.0.0.0	10.10.0.8			
+2	0.000875169	b8:27:eb:ba:c7:ba	ff:ff:ff:ff:ff:ff	ARP	Who has 10.10.0.8? Tell 10.10.0.254								
+3	1.025130799	b8:27:eb:ba:c7:ba	ff:ff:ff:ff:ff:ff	ARP	Who has 10.10.0.8? Tell 10.10.0.254								
+4	2.049180993	b8:27:eb:ba:c7:ba	ff:ff:ff:ff:ff:ff	ARP	Who has 10.10.0.8? Tell 10.10.0.254								
+5	3.004926900	10.10.0.254	10.10.0.8	ICMP	Echo (ping) request  id=0xc380, seq=0/0, ttl=64								
+6	3.005210342	10.10.0.254	10.10.0.8	DHCP	DHCP Offer    - Transaction ID 0x62f4cc3c	0x62f4cc3c	2	0.0.0.0	10.10.0.8		10.10.0.254	43200	21600
+7	3.005593525	0.0.0.0	255.255.255.255	DHCP	DHCP Request  - Transaction ID 0x62f4cc3c	0x62f4cc3c	3	0.0.0.0	0.0.0.0	10.10.0.8	10.10.0.254		
+8	3.015439977	10.10.0.254	10.10.0.8	DHCP	DHCP ACK      - Transaction ID 0x62f4cc3c	0x62f4cc3c	5	0.0.0.0	10.10.0.8		10.10.0.254	43200	21600
+9	3.056022316	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.8								
+10	5.056237784	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.8								
+11	7.056408662	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.8								

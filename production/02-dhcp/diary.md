@@ -150,10 +150,10 @@ Exciting. What configuration will let `pi-foo-dhcp` serve as the DHCP server?
 
 ## A quick tour through dnsmasq configuration
 
-To start, before I even consider plugging this new Pi into the switch, I need to install dnsmasq (and neovim!) and start the service.
+To start, before I even consider plugging this new Pi into the switch, I need to install dnsmasq, its lease utility (and neovim!), and start the service.
 
 ```
-sudo apt install dnsmasq neovim
+sudo apt install dnsmasq dnsmasq-utils neovim
 sudo service dnsmasq start
 ```
 
@@ -344,20 +344,33 @@ on transmission {
 
 The condition limits the preference to Discover (`01`). If the server offers a different address, the Pi requests that offered address instead.
 
-Changing that preference doesn't replace the lease I already have for `.8`. If I clear that and reactivate the profile, I can watch a fresh exchange.
+Changing that preference doesn't replace the lease I already have for `.8`. The server remembers it too, and can offer `.8` again. To give the new preference a fresh start, I first deactivate the connection on `pi-foo-02`.
 
 ```
 $ sudo nmcli connection down eth-dhcp
+```
+
+On `pi-foo-dhcp`, I check its lease records and release just Pi 02's old binding. The address and MAC below come from Pi 02's entry; use the values from your own setup.
+
+```
+$ sudo cat /var/lib/misc/dnsmasq.leases
+$ sudo dhcp_release eth0 10.10.0.8 b8:27:eb:7d:e8:ee
+$ sudo cat /var/lib/misc/dnsmasq.leases
+```
+
+The `dhcp_release` utility comes from `dnsmasq-utils`, installed earlier. I run it on the server after the client has stopped using the address. It removes that one lease while leaving dnsmasq running and other devices' records intact. Another look at the lease file confirms Pi 02's entry is gone.
+
+Back on `pi-foo-02`, I clear its remembered lease so the next attempt starts with Discover.
+
+```
 $ lease_uuid=$(nmcli -g connection.uuid connection show eth-dhcp)
 $ sudo rm -f "/var/lib/NetworkManager/dhclient-${lease_uuid}-eth0.lease"
 ```
 
-I leave dnsmasq running and its lease records intact. Clearing the client's remembered lease lets it start a fresh exchange without making the server forget addresses other devices are still using.
-
 With the client ready, I can restart `tsharkie` on `pi-foo-02` and `pi-foo-dhcp`.
 
 ```
-$ tsharkie lesson-02_nm-request_$(hostname).pcapng -f 'arp or icmp or (udp and (port 67 or port 68))'
+$ tsharkie lesson-02-preference-release-to-two_$(hostname).pcapng -f 'arp or icmp or (udp and (port 67 or port 68))'
 ```
 
 In the second terminal on `pi-foo-02`, I reactivate the existing connection.
@@ -368,35 +381,35 @@ $ sudo nmcli connection up eth-dhcp
 
 BAM! `pi-foo-02` immediately requests and receives `.2`.
 
-Here's [pi-foo-02's side of the exchange](evidence/captures/2026-09-09-nm-preference/lesson-02_nm-request_pi-foo-02.pcapng). These excerpts were regenerated from the saved captures with tsharkie's formatting. They show only transaction `0x7289b37f`, with the original frame numbers intact.
+Here's [pi-foo-02's side of a verified repeat of that transition](evidence/2026-09-11-preference-release/lesson-02-preference-release-to-two_pi-foo-02.pcapng), using the conditional preference and releasing only its old server binding. These excerpts were regenerated from the saved captures with tsharkie's formatting. They show only transaction `0x4b71747d`, with the original frame numbers intact.
 
 ```text
  No. |  Time(s) | Source                     | Destination                | Proto    | Info
-   1 |    0.000 | 0.0.0.0                    | 255.255.255.255            | DHCP     | DHCP Discover - Transaction ID 0x7289b37f
-   3 |    3.005 | 10.10.0.254                | 10.10.0.2                  | DHCP     | DHCP Offer    - Transaction ID 0x7289b37f
-   4 |    3.006 | 0.0.0.0                    | 255.255.255.255            | DHCP     | DHCP Request  - Transaction ID 0x7289b37f
-   5 |    3.013 | 10.10.0.254                | 10.10.0.2                  | DHCP     | DHCP ACK      - Transaction ID 0x7289b37f
+   1 |    0.000 | 0.0.0.0                    | 255.255.255.255            | DHCP     | DHCP Discover - Transaction ID 0x4b71747d
+   3 |    3.005 | 10.10.0.254                | 10.10.0.2                  | DHCP     | DHCP Offer    - Transaction ID 0x4b71747d
+   4 |    3.005 | 0.0.0.0                    | 255.255.255.255            | DHCP     | DHCP Request  - Transaction ID 0x4b71747d
+   5 |    3.013 | 10.10.0.254                | 10.10.0.2                  | DHCP     | DHCP ACK      - Transaction ID 0x4b71747d
 ```
 
-And here’s [the server’s view](evidence/captures/2026-09-09-nm-preference/lesson-02_nm-request_pi-foo-dhcp.pcapng).
+And here’s [the server’s view](evidence/2026-09-11-preference-release/lesson-02-preference-release-to-two_pi-foo-dhcp.pcapng).
 
 ```text
  No. |  Time(s) | Source                     | Destination                | Proto    | Info
-   1 |    0.000 | 0.0.0.0                    | 255.255.255.255            | DHCP     | DHCP Discover - Transaction ID 0x7289b37f
-   3 |    3.004 | 10.10.0.254                | 10.10.0.2                  | DHCP     | DHCP Offer    - Transaction ID 0x7289b37f
-   4 |    3.006 | 0.0.0.0                    | 255.255.255.255            | DHCP     | DHCP Request  - Transaction ID 0x7289b37f
-   5 |    3.013 | 10.10.0.254                | 10.10.0.2                  | DHCP     | DHCP ACK      - Transaction ID 0x7289b37f
+   1 |    0.000 | 0.0.0.0                    | 255.255.255.255            | DHCP     | DHCP Discover - Transaction ID 0x4b71747d
+   3 |    3.004 | 10.10.0.254                | 10.10.0.2                  | DHCP     | DHCP Offer    - Transaction ID 0x4b71747d
+   4 |    3.005 | 0.0.0.0                    | 255.255.255.255            | DHCP     | DHCP Request  - Transaction ID 0x4b71747d
+   5 |    3.012 | 10.10.0.254                | 10.10.0.2                  | DHCP     | DHCP ACK      - Transaction ID 0x4b71747d
 ```
 
 The same transaction ID connects all four messages in both views. The
-[decoded client fields](evidence/captures/2026-09-09-nm-preference/pi-foo-02-dhcp-fields.tsv)
+[decoded client fields](evidence/2026-09-11-preference-release/lesson-02-preference-release-to-two_pi-foo-02.tsv)
 show `.2` in the requested-address option in Discover and Request, and `.2`
-in the address assigned by Offer and ACK.
+in the address offered by Offer and assigned by ACK.
 
 I can also use `tshark` to look inside a single frame. What happens if I take a look at just that first frame? Will I see the preference I set there?
 
 ```shell
-$ tshark -n -r ~/cap/lesson-02_nm-request_pi-foo-02.pcapng \
+$ tshark -n -r ~/cap/lesson-02-preference-release-to-two_pi-foo-02.pcapng \
     -Y 'frame.number == 1' \
     -O dhcp
 

@@ -1,0 +1,29 @@
+$ pi-foo-02: ip -j -4 addr show dev eth0
+[{"ifindex":2,"ifname":"eth0","flags":["BROADCAST","MULTICAST","UP","LOWER_UP"],"mtu":1500,"qdisc":"pfifo_fast","operstate":"UP","group":"default","txqlen":1000,"addr_info":[{"family":"inet","local":"10.10.0.2","prefixlen":24,"broadcast":"10.10.0.255","scope":"global","dynamic":true,"noprefixroute":true,"label":"eth0","valid_life_time":118,"preferred_life_time":118}]}]
+
+$ pi-foo-dhcp: sudo cat /var/lib/misc/dnsmasq.leases
+1789159125 b8:27:eb:7d:e8:ee 10.10.0.2 pi-foo-02 *
+1789192637 b8:27:eb:3a:e2:c8 10.10.0.1 pi-foo-01 *
+
+$ pi-foo-02: stop own capture /home/pi/cap/lesson-02-preference-timed-renewal_pi-foo-02.pcapng
+
+$ pi-foo-02: tshark -n -r /home/pi/cap/lesson-02-preference-timed-renewal_pi-foo-02.pcapng -Y dhcp -T fields -E header=y -e frame.number -e frame.time_relative -e dhcp.option.dhcp -e dhcp.id -e dhcp.ip.client -e dhcp.ip.your -e dhcp.option.requested_ip_address -e dhcp.option.dhcp_server_id -e dhcp.option.ip_address_lease_time -e dhcp.option.renewal_time_value
+frame.number	frame.time_relative	dhcp.option.dhcp	dhcp.id	dhcp.ip.client	dhcp.ip.your	dhcp.option.requested_ip_address	dhcp.option.dhcp_server_id	dhcp.option.ip_address_lease_time	dhcp.option.renewal_time_value
+1	0.000000000	1	0x7f68687a	0.0.0.0	0.0.0.0	10.10.0.2		120	
+2	0.001442676	2	0x7f68687a	0.0.0.0	10.10.0.2		10.10.0.254	120	60
+3	0.001758358	3	0x7f68687a	0.0.0.0	0.0.0.0	10.10.0.2	10.10.0.254	120	
+4	0.012753930	5	0x7f68687a	0.0.0.0	10.10.0.2		10.10.0.254	120	60
+11	54.644335015	3	0x7f68687a	10.10.0.2	0.0.0.0			120	
+12	54.651228025	5	0x7f68687a	10.10.0.2	10.10.0.2		10.10.0.254	120	55
+
+$ pi-foo-dhcp: stop own capture /home/pi/cap/lesson-02-preference-timed-renewal_pi-foo-dhcp.pcapng
+
+$ pi-foo-dhcp: tshark -n -r /home/pi/cap/lesson-02-preference-timed-renewal_pi-foo-dhcp.pcapng -Y dhcp -T fields -E header=y -e frame.number -e frame.time_relative -e dhcp.option.dhcp -e dhcp.id -e dhcp.ip.client -e dhcp.ip.your -e dhcp.option.requested_ip_address -e dhcp.option.dhcp_server_id -e dhcp.option.ip_address_lease_time -e dhcp.option.renewal_time_value
+frame.number	frame.time_relative	dhcp.option.dhcp	dhcp.id	dhcp.ip.client	dhcp.ip.your	dhcp.option.requested_ip_address	dhcp.option.dhcp_server_id	dhcp.option.ip_address_lease_time	dhcp.option.renewal_time_value
+1	0.000000000	1	0x7f68687a	0.0.0.0	0.0.0.0	10.10.0.2		120	
+2	0.000810307	2	0x7f68687a	0.0.0.0	10.10.0.2		10.10.0.254	120	60
+3	0.001753998	3	0x7f68687a	0.0.0.0	0.0.0.0	10.10.0.2	10.10.0.254	120	
+4	0.012127885	5	0x7f68687a	0.0.0.0	10.10.0.2		10.10.0.254	120	60
+12	54.643437000	3	0x7f68687a	10.10.0.2	0.0.0.0			120	
+13	54.649722112	5	0x7f68687a	10.10.0.2	10.10.0.2		10.10.0.254	120	55
+
