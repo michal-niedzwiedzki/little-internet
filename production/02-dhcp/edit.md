@@ -5,6 +5,17 @@ supporting work are committed and pushed; publication review and video
 preparation are next. Old-cut transcript and sampled-picture review are complete,
 but continuous playback/listening remain pending. No Resolve timeline edited.
 
+## Latest checkpoint — candidate ready for hardware testing
+
+PR #24's image build completed successfully. The artifact is
+`v0.5.3-7-g64ce9be-little-internet.img.xz` from
+[run 34491541652](https://github.com/ngrok/little-internet/actions/runs/34491541652).
+PR #24 is still open and draft at head `50b0343`. Joel is preparing to test;
+[fresh-image-test.md](fresh-image-test.md) is the place for candidate checksum,
+starting state, raw observations, workarounds, and issues. No boot/hardware
+result has been recorded. Keep new captures separate from the diary's archived
+recordings and validate the written steps before silently repairing them.
+
 ## Latest checkpoint — focused image PR opened
 
 Draft [PR #24](https://github.com/ngrok/little-internet/pull/24) targets main

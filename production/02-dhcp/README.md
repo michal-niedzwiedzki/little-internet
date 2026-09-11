@@ -14,6 +14,7 @@ workflow. The outline is a proposal; the research and scripts are unfinished.
 | [runbook.md](runbook.md) | Fresh-image preparation and interactive walkthrough |
 | [diary.md](diary.md) | New observations, explanations, and display needs |
 | [diary-video-notes.md](diary-video-notes.md) | Four original video directions preserved verbatim from the diary |
+| [fresh-image-test.md](fresh-image-test.md) | PR #24 candidate identity, fresh-image test notes, and sharp edges |
 | [publication-and-filming.md](publication-and-filming.md) | Review of the completed draft and separate paths to diary publication and filming |
 | [Fresh captures](evidence/captures/2026-09-09/README.md) | Eleven captures from the three Pis, in diary order, with source paths and verified checksums |
 | [Finished-network captures](evidence/captures/2026-09-09-e2e/README.md) | Three e2e captures, with full DORA for .1/.2, source paths, and verified checksums |
