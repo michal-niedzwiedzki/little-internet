@@ -5,6 +5,9 @@ headless **Raspberry Pi OS Lite** with the networking tools the lessons need
 already installed, like `tcpdump`, `tshark`, `arping`, `ethtool`, and
 VLAN/bridge tooling.
 
+The current image source also includes Neovim (`nvim`) for editing lesson
+configuration on the node; the next image build installs it automatically.
+
 ## Quickstart: flash a prebuilt image
 
 Download the image, write it to a microSD card, then edit one text file on the
