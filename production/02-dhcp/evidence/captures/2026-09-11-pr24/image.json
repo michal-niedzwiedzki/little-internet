@@ -1,0 +1,10 @@
+{
+  "file": "v0.5.3-7-g64ce9be-little-internet.img.xz",
+  "local_source": "/Users/joelhans/Downloads/v0.5.3-7-g64ce9be-little-internet.img.xz",
+  "sha256": "e0434890addceab35dad9e1e7b5dcddec9cbad3daebcc2455d1c6258ceee2025",
+  "bytes": 522828284,
+  "workflow_run": 34491541652,
+  "artifact_id": 10158242213,
+  "pr_head": "50b0343c8bfb978abb1a1358e35c6ea28ec05eba",
+  "note": "Checksum of downloaded image on disk; the bytes on the flashed SD cards were not independently checked."
+}

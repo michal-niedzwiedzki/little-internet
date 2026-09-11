@@ -3,7 +3,8 @@
 Use this file for rough observations and sharp edges while following
 [diary.md](diary.md). Record what happened before fixing it; we can then update
 the diary or image without mixing the new run with the original observations.
-No hardware verification is recorded yet.
+Hardware observations and recovery tests are recorded below. All 17 available
+captures are now in [the verified archive](evidence/captures/2026-09-11-pr24/README.md).
 
 ## Candidate and starting state
 
@@ -14,13 +15,13 @@ No hardware verification is recorded yet.
 - Artifact ID: `10158242213`
 - This is the PR candidate, not the published v0.5.3 image. PR builds use a
 merge checkout, so the version suffix need not match the branch head.
-- Downloaded `.img.xz` SHA-256: **record after download**
-- Test date: **fill in**
+- Downloaded `.img.xz` SHA-256: `e0434890addceab35dad9e1e7b5dcddec9cbad3daebcc2455d1c6258ceee2025` (local downloaded image; see archive image.json)
+- Test date: 2026-09-11
 - Same candidate flashed on all three Pis: **unverified**
 - Hostnames: `pi-foo-01`, `pi-foo-02`, `pi-foo-dhcp`
-- Wi-Fi SSH, first-boot provisioning, and OLEDs: **unverified**
+- Wi-Fi SSH works during coaching; Pi 01 OLED/address agreement confirmed. Initial provisioning steps were performed by Joel, not independently observed.
 - Starting Ethernet topology and switch state: **record**
-- Capture filenames/directory for this run: **record**
+- Capture filenames/directory for this run: [17 files indexed here](evidence/captures/2026-09-11-pr24/README.md); originals under `/home/pi/cap/` on each Pi.
 
 To record the image checksum on the Mac, run `shasum -a 256` followed by the
 actual downloaded `.img.xz` path. Do not record Wi-Fi passwords here.
@@ -277,3 +278,22 @@ Still to validate: transition from an arbitrary existing lease (such as .8) to
 a newly configured preference (.2) while retaining the server's existing lease
 records. The successful reset tests above reacquired already-preferred
 addresses; they do not by themselves validate that different transition.
+
+
+### Evidence archived and image PR updated — 2026-09-11
+
+All 17 available dry-run/recovery captures were copied from the three Pis,
+verified remote-before/local/remote-after by SHA-256, and decoded successfully.
+The [archive index](evidence/captures/2026-09-11-pr24/README.md) now provides
+filenames, field decodes, and frame references. It supersedes earlier statements
+that recovery filenames and the switch's original .2 ACK were unavailable.
+
+The archived preference run offers .8 but ACKs the client's request for .2;
+retain that distinction when analyzing the controlled preference test. Packet
+rows alone do not establish the server lease-file state before that attempt.
+
+Neovim was added to PR #24 in commit `881a780`; image installation awaits the
+new CI artifact and a subsequent `nvim --version` check on that image. Existing
+networking results apply to the earlier tested candidate, not to a freshly
+booted Neovim build. The workstation SSH-reset utility was added separately;
+its hardware execution has not been established by this coaching session.

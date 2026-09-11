@@ -1,0 +1,177 @@
+{
+  "copied_on": "2026-09-11",
+  "tested_pr_head": "50b0343c8bfb978abb1a1358e35c6ea28ec05eba",
+  "files": [
+    {
+      "host": "pi-foo-01",
+      "source": "/home/pi/cap/lesson-02-dry-arping-fix_pi-foo-01.pcapng",
+      "size": 1404,
+      "sha256": "2ccdef6f94c5c1e98ad786fe3efc8fc0a8dee979cac618cfd9648d25f41a7344",
+      "local": "pi-foo-01/lesson-02-dry-arping-fix_pi-foo-01.pcapng",
+      "remote_after_sha256": "2ccdef6f94c5c1e98ad786fe3efc8fc0a8dee979cac618cfd9648d25f41a7344",
+      "decoded": "pi-foo-01/lesson-02-dry-arping-fix_pi-foo-01.tsv",
+      "frames": 12
+    },
+    {
+      "host": "pi-foo-01",
+      "source": "/home/pi/cap/lesson-02-dry-run_dhcp_pi-foo-01.pcapng",
+      "size": 24376,
+      "sha256": "091e3aa67cf98560e6ecf82f30af950e333cd0637c1b5e8286f54940227312d4",
+      "local": "pi-foo-01/lesson-02-dry-run_dhcp_pi-foo-01.pcapng",
+      "remote_after_sha256": "091e3aa67cf98560e6ecf82f30af950e333cd0637c1b5e8286f54940227312d4",
+      "decoded": "pi-foo-01/lesson-02-dry-run_dhcp_pi-foo-01.tsv",
+      "frames": 83
+    },
+    {
+      "host": "pi-foo-01",
+      "source": "/home/pi/cap/lesson-02-dry-run_e2e-fix_pi-foo-01.pcapng",
+      "size": 2364,
+      "sha256": "c94f6e970d6c4e62c6763e5d147e5210b0080fe7d3ea0529fa1991693785f383",
+      "local": "pi-foo-01/lesson-02-dry-run_e2e-fix_pi-foo-01.pcapng",
+      "remote_after_sha256": "c94f6e970d6c4e62c6763e5d147e5210b0080fe7d3ea0529fa1991693785f383",
+      "decoded": "pi-foo-01/lesson-02-dry-run_e2e-fix_pi-foo-01.tsv",
+      "frames": 10
+    },
+    {
+      "host": "pi-foo-01",
+      "source": "/home/pi/cap/lesson-02-dry-run_e2e-ping_pi-foo-01.pcapng",
+      "size": 964,
+      "sha256": "16756040dec37ff3bb3f69f7987f1b26e3b71b99f5cacabd7abcb5ddc6465634",
+      "local": "pi-foo-01/lesson-02-dry-run_e2e-ping_pi-foo-01.pcapng",
+      "remote_after_sha256": "16756040dec37ff3bb3f69f7987f1b26e3b71b99f5cacabd7abcb5ddc6465634",
+      "decoded": "pi-foo-01/lesson-02-dry-run_e2e-ping_pi-foo-01.tsv",
+      "frames": 6
+    },
+    {
+      "host": "pi-foo-01",
+      "source": "/home/pi/cap/lesson-02-dry-run_e2e-retry_pi-foo-01.pcapng",
+      "size": 2268,
+      "sha256": "40dca1ee391eb5908631dafe305af96c1b325d08815eb7500c817563516ee6b7",
+      "local": "pi-foo-01/lesson-02-dry-run_e2e-retry_pi-foo-01.pcapng",
+      "remote_after_sha256": "40dca1ee391eb5908631dafe305af96c1b325d08815eb7500c817563516ee6b7",
+      "decoded": "pi-foo-01/lesson-02-dry-run_e2e-retry_pi-foo-01.tsv",
+      "frames": 9
+    },
+    {
+      "host": "pi-foo-01",
+      "source": "/home/pi/cap/lesson-02-dry-run_e2e_pi-foo-01.pcapng",
+      "size": 732,
+      "sha256": "47281c6c2044d17ce69f695c7b62c45b65f840325332325f678d0ec003180d7a",
+      "local": "pi-foo-01/lesson-02-dry-run_e2e_pi-foo-01.pcapng",
+      "remote_after_sha256": "47281c6c2044d17ce69f695c7b62c45b65f840325332325f678d0ec003180d7a",
+      "decoded": "pi-foo-01/lesson-02-dry-run_e2e_pi-foo-01.tsv",
+      "frames": 4
+    },
+    {
+      "host": "pi-foo-01",
+      "source": "/home/pi/cap/lesson-02-dry-run_link-switch_pi-foo-01.pcapng",
+      "size": 12552,
+      "sha256": "b54be732d911d000f27c07dca098cab67ebe81c200c797a41e90e177acfc4d8e",
+      "local": "pi-foo-01/lesson-02-dry-run_link-switch_pi-foo-01.pcapng",
+      "remote_after_sha256": "b54be732d911d000f27c07dca098cab67ebe81c200c797a41e90e177acfc4d8e",
+      "decoded": "pi-foo-01/lesson-02-dry-run_link-switch_pi-foo-01.tsv",
+      "frames": 66
+    },
+    {
+      "host": "pi-foo-02",
+      "source": "/home/pi/cap/lesson-02-dry-run_dhcp_pi-foo-02.pcapng",
+      "size": 23660,
+      "sha256": "404f2c9ce4d497c0f08e969d337b334345e00157198ce3ef19f96becdc53bcc1",
+      "local": "pi-foo-02/lesson-02-dry-run_dhcp_pi-foo-02.pcapng",
+      "remote_after_sha256": "404f2c9ce4d497c0f08e969d337b334345e00157198ce3ef19f96becdc53bcc1",
+      "decoded": "pi-foo-02/lesson-02-dry-run_dhcp_pi-foo-02.tsv",
+      "frames": 79
+    },
+    {
+      "host": "pi-foo-02",
+      "source": "/home/pi/cap/lesson-02-dry-run_e2e-fix-ping_pi-foo-02.pcapng",
+      "size": 964,
+      "sha256": "4ee68c0146ebddaf437bb2fa67ef05a352f46297cb024117d98f4cd461ffb0bf",
+      "local": "pi-foo-02/lesson-02-dry-run_e2e-fix-ping_pi-foo-02.pcapng",
+      "remote_after_sha256": "4ee68c0146ebddaf437bb2fa67ef05a352f46297cb024117d98f4cd461ffb0bf",
+      "decoded": "pi-foo-02/lesson-02-dry-run_e2e-fix-ping_pi-foo-02.tsv",
+      "frames": 6
+    },
+    {
+      "host": "pi-foo-02",
+      "source": "/home/pi/cap/lesson-02-dry-run_e2e-fix_pi-foo-02.pcapng",
+      "size": 3176,
+      "sha256": "55f1c4e6805e5d4b355a91c81fe2f39f664da6a9960f0c599b87597ecdaa1d65",
+      "local": "pi-foo-02/lesson-02-dry-run_e2e-fix_pi-foo-02.pcapng",
+      "remote_after_sha256": "55f1c4e6805e5d4b355a91c81fe2f39f664da6a9960f0c599b87597ecdaa1d65",
+      "decoded": "pi-foo-02/lesson-02-dry-run_e2e-fix_pi-foo-02.tsv",
+      "frames": 19
+    },
+    {
+      "host": "pi-foo-02",
+      "source": "/home/pi/cap/lesson-02-dry-run_e2e-retry_pi-foo-02.pcapng",
+      "size": 2268,
+      "sha256": "104af6d1e5dc9573e38061eebb6d763b79fcec4e27ab0700c26f864bf196684a",
+      "local": "pi-foo-02/lesson-02-dry-run_e2e-retry_pi-foo-02.pcapng",
+      "remote_after_sha256": "104af6d1e5dc9573e38061eebb6d763b79fcec4e27ab0700c26f864bf196684a",
+      "decoded": "pi-foo-02/lesson-02-dry-run_e2e-retry_pi-foo-02.tsv",
+      "frames": 9
+    },
+    {
+      "host": "pi-foo-02",
+      "source": "/home/pi/cap/lesson-02-dry-run_e2e_pi-foo-02.pcapng",
+      "size": 3048,
+      "sha256": "099be8c9577aacb6368b746ed294ced199abe03c6e012f9b9405438fa6b664e9",
+      "local": "pi-foo-02/lesson-02-dry-run_e2e_pi-foo-02.pcapng",
+      "remote_after_sha256": "099be8c9577aacb6368b746ed294ced199abe03c6e012f9b9405438fa6b664e9",
+      "decoded": "pi-foo-02/lesson-02-dry-run_e2e_pi-foo-02.tsv",
+      "frames": 23
+    },
+    {
+      "host": "pi-foo-02",
+      "source": "/home/pi/cap/lesson-02-dry-run_link-switch_pi-foo-02.pcapng",
+      "size": 12632,
+      "sha256": "5c306d6b32e090f09cab2260a242468fb9eabcbd04508feab0a241d404485f4e",
+      "local": "pi-foo-02/lesson-02-dry-run_link-switch_pi-foo-02.pcapng",
+      "remote_after_sha256": "5c306d6b32e090f09cab2260a242468fb9eabcbd04508feab0a241d404485f4e",
+      "decoded": "pi-foo-02/lesson-02-dry-run_link-switch_pi-foo-02.tsv",
+      "frames": 65
+    },
+    {
+      "host": "pi-foo-02",
+      "source": "/home/pi/cap/lesson-02-dry-run_nm-request_pi-foo-02.pcapng",
+      "size": 4464,
+      "sha256": "2e52eac1d5f9860066ab9b90a6e1532bb58b4657f25883e6ce4fe533b788f07a",
+      "local": "pi-foo-02/lesson-02-dry-run_nm-request_pi-foo-02.pcapng",
+      "remote_after_sha256": "2e52eac1d5f9860066ab9b90a6e1532bb58b4657f25883e6ce4fe533b788f07a",
+      "decoded": "pi-foo-02/lesson-02-dry-run_nm-request_pi-foo-02.tsv",
+      "frames": 33
+    },
+    {
+      "host": "pi-foo-dhcp",
+      "source": "/home/pi/cap/lesson-02-dry-run_dhcp_pi-foo-dhcp.pcapng",
+      "size": 23064,
+      "sha256": "69516e190220ed98093e8999c5cd2c8ff30adc681a0912defcf61804075ffc63",
+      "local": "pi-foo-dhcp/lesson-02-dry-run_dhcp_pi-foo-dhcp.pcapng",
+      "remote_after_sha256": "69516e190220ed98093e8999c5cd2c8ff30adc681a0912defcf61804075ffc63",
+      "decoded": "pi-foo-dhcp/lesson-02-dry-run_dhcp_pi-foo-dhcp.tsv",
+      "frames": 83
+    },
+    {
+      "host": "pi-foo-dhcp",
+      "source": "/home/pi/cap/lesson-02-dry-run_e2e_pi-foo-dhcp.pcapng",
+      "size": 12936,
+      "sha256": "84712a3183b152396c7d0ce5b15a5745e2dec84f7ecb2c865d942fe7e877da50",
+      "local": "pi-foo-dhcp/lesson-02-dry-run_e2e_pi-foo-dhcp.pcapng",
+      "remote_after_sha256": "84712a3183b152396c7d0ce5b15a5745e2dec84f7ecb2c865d942fe7e877da50",
+      "decoded": "pi-foo-dhcp/lesson-02-dry-run_e2e_pi-foo-dhcp.tsv",
+      "frames": 119
+    },
+    {
+      "host": "pi-foo-dhcp",
+      "source": "/home/pi/cap/lesson-02-dry-run_nm-request_pi-foo-dhcp.pcapng",
+      "size": 3888,
+      "sha256": "7cdaf6c4e61ce1818e997291a47041c5286b980db9f59d7866d70dd8532bc499",
+      "local": "pi-foo-dhcp/lesson-02-dry-run_nm-request_pi-foo-dhcp.pcapng",
+      "remote_after_sha256": "7cdaf6c4e61ce1818e997291a47041c5286b980db9f59d7866d70dd8532bc499",
+      "decoded": "pi-foo-dhcp/lesson-02-dry-run_nm-request_pi-foo-dhcp.tsv",
+      "frames": 27
+    }
+  ],
+  "decoded_with": "TShark (Wireshark) 4.6.6 (Git commit 3a22c3ef473d)."
+}

@@ -1,0 +1,7 @@
+frame.number	frame.time_relative	_ws.col.def_src	_ws.col.def_dst	_ws.col.protocol	_ws.col.info	dhcp.id	dhcp.option.dhcp	dhcp.hw.mac_addr	dhcp.option.requested_ip_address	dhcp.ip.your
+1	0.000000000	10.10.0.1	10.10.0.2	ICMP	Echo (ping) request  id=0x0005, seq=1/256, ttl=64					
+2	0.000706087	10.10.0.2	10.10.0.1	ICMP	Echo (ping) reply    id=0x0005, seq=1/256, ttl=64 (request in 1)					
+3	5.114971169	b8:27:eb:3a:e2:c8	b8:27:eb:7d:e8:ee	ARP	Who has 10.10.0.2? Tell 10.10.0.1					
+4	5.115464602	b8:27:eb:7d:e8:ee	b8:27:eb:3a:e2:c8	ARP	10.10.0.2 is at b8:27:eb:7d:e8:ee					
+5	5.237105650	b8:27:eb:7d:e8:ee	b8:27:eb:3a:e2:c8	ARP	Who has 10.10.0.1? Tell 10.10.0.2					
+6	5.237133202	b8:27:eb:3a:e2:c8	b8:27:eb:7d:e8:ee	ARP	10.10.0.1 is at b8:27:eb:3a:e2:c8					

@@ -1,0 +1,20 @@
+frame.number	frame.time_relative	_ws.col.def_src	_ws.col.def_dst	_ws.col.protocol	_ws.col.info	dhcp.id	dhcp.option.dhcp	dhcp.hw.mac_addr	dhcp.option.requested_ip_address	dhcp.ip.your
+1	0.000000000	0.0.0.0	255.255.255.255	DHCP	DHCP Discover - Transaction ID 0x38ee227f	0x38ee227f	1	b8:27:eb:7d:e8:ee	10.10.0.2	0.0.0.0
+2	0.002949306	b8:27:eb:ba:c7:ba	ff:ff:ff:ff:ff:ff	ARP	Who has 10.10.0.8? Tell 10.10.0.254					
+3	1.003099962	b8:27:eb:ba:c7:ba	ff:ff:ff:ff:ff:ff	ARP	Who has 10.10.0.8? Tell 10.10.0.254					
+4	2.027091624	b8:27:eb:ba:c7:ba	ff:ff:ff:ff:ff:ff	ARP	Who has 10.10.0.8? Tell 10.10.0.254					
+5	3.006841409	10.10.0.254	10.10.0.8	ICMP	Echo (ping) request  id=0x5c39, seq=0/0, ttl=64					
+6	3.006980106	10.10.0.254	10.10.0.8	DHCP	DHCP Offer    - Transaction ID 0x38ee227f	0x38ee227f	2	b8:27:eb:7d:e8:ee		10.10.0.8
+7	3.007370677	0.0.0.0	255.255.255.255	DHCP	DHCP Request  - Transaction ID 0x38ee227f	0x38ee227f	3	b8:27:eb:7d:e8:ee	10.10.0.2	0.0.0.0
+8	3.017920824	10.10.0.254	10.10.0.2	DHCP	DHCP ACK      - Transaction ID 0x38ee227f	0x38ee227f	5	b8:27:eb:7d:e8:ee		10.10.0.2
+9	3.054680400	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.2					
+10	3.056449296	3c:78:95:3e:f4:62	b8:27:eb:7d:e8:ee	ARP	Gratuitous ARP for 10.10.0.2 (Reply) (duplicate use of 10.10.0.2 detected!)					
+11	3.058458295	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.2					
+12	3.059964015	3c:78:95:3e:f4:62	b8:27:eb:7d:e8:ee	ARP	Gratuitous ARP for 10.10.0.2 (Reply) (duplicate use of 10.10.0.2 detected!)					
+13	5.054933951	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.2					
+14	5.056439672	3c:78:95:3e:f4:62	b8:27:eb:7d:e8:ee	ARP	Gratuitous ARP for 10.10.0.2 (Reply) (duplicate use of 10.10.0.2 detected!)					
+15	7.055099534	b8:27:eb:7d:e8:ee	ff:ff:ff:ff:ff:ff	ARP	ARP Announcement for 10.10.0.2					
+16	7.056803066	3c:78:95:3e:f4:62	b8:27:eb:7d:e8:ee	ARP	Gratuitous ARP for 10.10.0.2 (Reply) (duplicate use of 10.10.0.2 detected!)					
+17	8.235108876	b8:27:eb:ba:c7:ba	b8:27:eb:7d:e8:ee	ARP	Who has 10.10.0.2? Tell 10.10.0.254					
+18	8.235175282	b8:27:eb:7d:e8:ee	b8:27:eb:ba:c7:ba	ARP	10.10.0.2 is at b8:27:eb:7d:e8:ee					
+19	8.235110647	b8:27:eb:ba:c7:ba	b8:27:eb:7d:e8:ee	ARP	Who has 10.10.0.8? Tell 10.10.0.254					

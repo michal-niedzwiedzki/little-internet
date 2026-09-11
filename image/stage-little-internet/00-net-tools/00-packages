@@ -8,6 +8,9 @@ less
 # NetworkManager's DHCP backend, including client address preferences.
 isc-dhcp-client
 
+# Edit lesson configuration directly on a freshly flashed node.
+neovim
+
 # Layer-2 / ARP tooling
 iputils-arping
 ethtool

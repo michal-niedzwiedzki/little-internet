@@ -1,0 +1,5 @@
+frame.number	frame.time_relative	_ws.col.def_src	_ws.col.def_dst	_ws.col.protocol	_ws.col.info	dhcp.id	dhcp.option.dhcp	dhcp.hw.mac_addr	dhcp.option.requested_ip_address	dhcp.ip.your
+1	0.000000000	3c:78:95:3e:f4:62	ff:ff:ff:ff:ff:ff	ARP	Who has 10.10.0.254? Tell 10.10.0.2					
+2	240.183533578	3c:78:95:3e:f4:62	ff:ff:ff:ff:ff:ff	ARP	Who has 10.10.0.254? Tell 10.10.0.2					
+3	300.229667686	3c:78:95:3e:f4:62	ff:ff:ff:ff:ff:ff	ARP	Who has 10.10.0.254? Tell 10.10.0.2					
+4	360.275838360	3c:78:95:3e:f4:62	ff:ff:ff:ff:ff:ff	ARP	Who has 10.10.0.254? Tell 10.10.0.2					

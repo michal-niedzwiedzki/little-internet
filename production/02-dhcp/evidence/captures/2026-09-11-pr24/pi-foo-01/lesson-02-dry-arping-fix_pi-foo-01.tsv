@@ -1,0 +1,13 @@
+frame.number	frame.time_relative	_ws.col.def_src	_ws.col.def_dst	_ws.col.protocol	_ws.col.info	dhcp.id	dhcp.option.dhcp	dhcp.hw.mac_addr	dhcp.option.requested_ip_address	dhcp.ip.your
+1	0.000000000	b8:27:eb:3a:e2:c8	ff:ff:ff:ff:ff:ff	ARP	Who has 10.10.0.2? Tell 10.10.0.1					
+2	0.000515308	b8:27:eb:7d:e8:ee	b8:27:eb:3a:e2:c8	ARP	10.10.0.2 is at b8:27:eb:7d:e8:ee					
+3	0.001637485	3c:78:95:3e:f4:62	b8:27:eb:3a:e2:c8	ARP	10.10.0.2 is at 3c:78:95:3e:f4:62					
+4	0.999968033	b8:27:eb:3a:e2:c8	ff:ff:ff:ff:ff:ff	ARP	Who has 10.10.0.2? Tell 10.10.0.1					
+5	1.000470216	b8:27:eb:7d:e8:ee	b8:27:eb:3a:e2:c8	ARP	10.10.0.2 is at b8:27:eb:7d:e8:ee					
+6	1.001352447	3c:78:95:3e:f4:62	b8:27:eb:3a:e2:c8	ARP	10.10.0.2 is at 3c:78:95:3e:f4:62					
+7	1.999969242	b8:27:eb:3a:e2:c8	ff:ff:ff:ff:ff:ff	ARP	Who has 10.10.0.2? Tell 10.10.0.1					
+8	2.000449602	b8:27:eb:7d:e8:ee	b8:27:eb:3a:e2:c8	ARP	10.10.0.2 is at b8:27:eb:7d:e8:ee					
+9	2.001369698	3c:78:95:3e:f4:62	b8:27:eb:3a:e2:c8	ARP	10.10.0.2 is at 3c:78:95:3e:f4:62					
+10	3.000023576	b8:27:eb:3a:e2:c8	ff:ff:ff:ff:ff:ff	ARP	Who has 10.10.0.2? Tell 10.10.0.1					
+11	3.000599196	b8:27:eb:7d:e8:ee	b8:27:eb:3a:e2:c8	ARP	10.10.0.2 is at b8:27:eb:7d:e8:ee					
+12	3.001990433	3c:78:95:3e:f4:62	b8:27:eb:3a:e2:c8	ARP	10.10.0.2 is at 3c:78:95:3e:f4:62					
