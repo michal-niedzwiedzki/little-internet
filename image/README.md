@@ -130,8 +130,16 @@ lesson, a client can add an Ethernet-specific preference, for example on Pi 02:
 
 ```conf
 # /etc/NetworkManager/dhclient-eth0.conf
-send dhcp-requested-address 10.10.0.2;
+on transmission {
+    if config-option dhcp-message-type = 01 {
+        send dhcp-requested-address 10.10.0.2;
+    }
+}
 ```
+
+The condition sends the preference only in Discover (`01`), leaving dhclient
+to request the address selected from the server's Offer. Use `10.10.0.1` for Pi 01.
+Replace any existing unconditional `send dhcp-requested-address` line.
 
 Keep that preference out of global `/etc/dhcp/dhclient.conf`, where it could
 also affect management Wi-Fi. The server decides whether to grant a requested

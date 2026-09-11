@@ -5,6 +5,19 @@ supporting work are committed and pushed; publication review and video
 preparation are next. Old-cut transcript and sampled-picture review are complete,
 but continuous playback/listening remain pending. No Resolve timeline edited.
 
+## Latest checkpoint — conditional example added to publication docs
+
+At Joel's request, replaced the unconditional requested-address example in
+`diary.md` and `image/README.md`, including the focused image PR worktree.
+The prose explains that the condition applies only to Discover and lets Request
+select the server's Offer. The diary no longer calls it a single-line setting.
+No Pi configuration was changed in this documentation edit.
+
+Remaining validation from the prior checkpoint still applies: timed renewal and
+an assignment of a newly preferred address without an old server binding. The
+historical B07 capture was not replaced; align the final walkthrough and its
+capture with the tested preparation before treating publication as complete.
+
 ## Latest checkpoint — conditional preference fallback passed
 
 Joel authorized an agent-run test on Pi 02. The conditional Discover-only hint

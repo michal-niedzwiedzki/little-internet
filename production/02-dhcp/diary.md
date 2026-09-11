@@ -331,12 +331,18 @@ Is there anything that I can do about the IP addresses these devices get?
 
 With DHCP, you have two ways of getting a specific IPv4 address: first, by the client *politely* requesting it; and second, by configuring the DHCP server itself to associate specific MAC addresses with specific IPs. The former has to be polite, because the DHCP server gets the final say as to which addresses go where.
 
-Still, I'd like to have the Pis politely ask. Doing so requires a single line of configuration.
+Still, I'd like to have the Pis politely ask. Here's the configuration for `pi-foo-02`:
 
 ```
 # /etc/NetworkManager/dhclient-eth0.conf
-send dhcp-requested-address 10.10.0.2;
+on transmission {
+    if config-option dhcp-message-type = 01 {
+        send dhcp-requested-address 10.10.0.2;
+    }
+}
 ```
+
+The condition limits the preference to Discover (`01`). If the server offers a different address, the Pi requests that offered address instead.
 
 Changing that preference doesn't replace the lease I already have for `.8`. If I clear that and reactivate the profile, I can watch a fresh exchange.
 
