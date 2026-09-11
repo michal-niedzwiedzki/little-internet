@@ -5,6 +5,26 @@ supporting work are committed and pushed; publication review and video
 preparation are next. Old-cut transcript and sampled-picture review are complete,
 but continuous playback/listening remain pending. No Resolve timeline edited.
 
+## Latest checkpoint — evidence archived and PR #24 refreshed
+
+All 17 new captures are archived, hash-verified, decoded, and pushed in
+`eb0f486`; see [the archive](evidence/captures/2026-09-11-pr24/README.md).
+The downloaded candidate image checksum is recorded there. The original switch
+.2 ACK is now directly identified, and preference traces show an Offer of .8
+followed by a Request/ACK of .2; preserve that distinction in further analysis.
+
+Neovim was added to the image PR in `881a780` and mirrored in this worktree's
+package manifest. PR #24's description now records the hardware results,
+procedure corrections, evidence link, and remaining checks. Its
+[new build](https://github.com/ngrok/little-internet/actions/runs/34634904364)
+is in progress. No merge or tag has been made.
+
+Next: coach the controlled preference transition on the existing Pi 02. No
+reflash is needed: obtain a real DHCP lease for another available address,
+then request .2 while preserving the server's records. Keep Pi 01 and switch
+management unchanged. Fresh Neovim-artifact and switch persistence checks
+remain separate. Do not run the hardware preparation without learner pacing.
+
 ## Latest checkpoint — coached reset recovery and diary corrections
 
 Joel diagnosed and recovered two issues: NetworkManager did not automatically
