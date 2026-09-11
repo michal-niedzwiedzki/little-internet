@@ -45,6 +45,7 @@ whatever question hooks you:
 | #   | The question                            | Read the story                                | Run it yourself            | Watch it                                             |
 | --- | --------------------------------------- | --------------------------------------------- | -------------------------- | ---------------------------------------------------- |
 | 00  | Two Pis, one cable: can they just talk? | [Diary 00](./diaries/00_two-pis-one-cable.md) | [Lesson 00](./lessons/00/) | [Video](https://www.youtube.com/watch?v=XIlKS4TVt74) |
+| 01  | Who hands out IP addresses on a local network? | [Diary 01](./diaries/01_who-hands-out-addresses.md) | — | — |
 
 ## Want to build your own little internet?
 
