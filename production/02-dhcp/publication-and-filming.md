@@ -1,5 +1,35 @@
 # From the finished walkthrough to publication and filming
 
+## Publication checkpoint — 2026-09-11
+
+Draft [diary PR #25](https://github.com/ngrok/little-internet/pull/25) is open
+from `joelhans/diary-01-dhcp`, commit `45c9679`, stacked on the image PR branch
+`joelhans/image-dhcp-tsharkie`. Its isolated worktree is
+`/tmp/little-internet-diary-dhcp-pr`. Public copy:
+`diaries/01_who-hands-out-addresses.md`; evidence:
+`diaries/captures/01-dhcp/`. Production's 02 numbering stays unchanged.
+
+The PR includes the article, root README entry, 16 original captures, one TSV,
+server log excerpts, and evidence index/checksums. All 43 local article/evidence
+links resolve, all copied hashes match, and all captures decode without warnings.
+Commands and output match the reviewed draft apart from one trailing space.
+
+Image [PR #24](https://github.com/ngrok/little-internet/pull/24) at `c153c2f`
+passed its latest build, run `34645413827`. The Neovim build at `881a780` also
+passed; subsequent changes are documentation only. The earlier candidate was
+hardware-tested, including corrected preference transition and timed renewal;
+the latest artifact has not been flashed. The PR description now distinguishes
+those coverage limits from unresolved image failures. Switch management
+persistence and hardware execution of the locally tested SSH-reset utility are
+not new DHCP-image merge blockers.
+
+Next: Joel can mark #24 ready and merge it, then tag the merged commit and wait
+for the release image build. No merge or tag was performed by the agent. Once
+available, pin the actual release version, asset, and checksum in the public
+diary, then retarget/rebase #25 onto main while preserving its diary-only diff.
+No further DHCP experiment is needed for this packaging. The video remains a
+separate track. Do not treat older checkpoints below as reopened test gates.
+
 Joel completed the diary through B06. The raw draft, research, tools, image
 source, and 17 captured packet files are preserved in commit `70a3f94`, pushed
 to `origin/joelhans/production-02-dhcp`. This branch is the working archive.
