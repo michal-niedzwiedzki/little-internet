@@ -26,11 +26,30 @@ If not, *why not*?
 
 ### A short aside and reminder about the setup
 
-All the Pis start with the same [little-internet image](../image/README.md). I connect over Wi-Fi for SSH, leaving Ethernet for the experiments. I've named the two existing Pis `pi-foo-01` and `pi-foo-02`, and they start with their cables unplugged.
+To follow along, start all the Pis with the same [v0.6.0 little-internet image](https://github.com/ngrok/little-internet/releases/tag/v0.6.0). I connect over Wi-Fi for SSH, leaving Ethernet for the experiments. I've named the two existing Pis `pi-foo-01` and `pi-foo-02`, and they start with their cables unplugged.
 
 I also prepare the switch's management interface: in its IP settings, I disable DHCP and set its address to `10.10.0.253`, with subnet mask `255.255.255.0`. That keeps it outside the `.1–.10` pool I'll use for the clients and separate from the DHCP server's `.254`. The switch doesn't need a management IP to carry Ethernet frames, but this gives me a predictable address for its settings.
 
 The image prepared for this diary includes [`tsharkie`](../tools/tsharkie/README.md), a little utility I made to make captures more readable. It also configures NetworkManager to use dhclient for DHCP. NetworkManager manages the interfaces throughout, and later, I'll configure the Pis to request particular addresses.
+
+[Download the v0.6.0 image](https://github.com/ngrok/little-internet/releases/download/v0.6.0/v0.6.0-little-internet.img.xz), then follow the [flashing instructions](../image/README.md).
+
+<details>
+<summary>Verify your download</summary>
+
+From the directory containing the downloaded file, run this on your computer before flashing:
+
+```shell
+shasum -a 256 v0.6.0-little-internet.img.xz
+```
+
+The SHA-256 should match the release asset's checksum:
+
+```text
+5d1f79bf1a60dac95b691fc2319cf497a70d4bde57ef3984c9a33a2b03a66c6a
+```
+
+</details>
 
 Every packet excerpt below links to its saved capture, recorded on `eth0`. The frame numbers match those files, and the times are seconds since the first packet in each capture, rounded to three decimal places. These captures preserve earlier runs, including traffic from when the switch still used DHCP; the setup and reset instructions reflect what I learned while testing the walkthrough.
 
