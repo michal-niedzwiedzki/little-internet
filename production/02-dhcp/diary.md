@@ -18,7 +18,7 @@ Before I jump right in, a refresher: I'm building a little internet out of Raspb
 
 Okay. With that out of the way, it's time to say hello to the TP-Link TL-SG108E, an 8-port switch. I got it for this build because it's relatively inexpensive and has more than enough ports to hook up *anything* I could possibly want here. If I need more than 8 ports, I've gone off the rails completely.
 
-When I bought this switch, I assumed that it was capable of handing out IP addresses. I thought this lesson would be very short and sweet. Boy, was I wrong! Just before embarking on this build, I realized this particular one doesn't have a DHCP server built in. That's actually _good news_. It means that I need to figure out a different way to run said DHCP server. It also means I can record, visualize, and reproduce how it works.
+When I bought this switch, I assumed that it was capable of handing out IP addresses. I thought this lesson would be very short and sweet. Boy, was I wrong! Just before embarking on this build, I realized this particular one doesn't have a DHCP server built in. That's actually *good news*. It means that I need to figure out a different way to run said DHCP server. It also means I can record, visualize, and reproduce how it works.
 
 But for now, I want to know exactly what happens when I plug the two Pis into the switch. Do they just start working now?
 
@@ -28,9 +28,11 @@ If not, *why not*?
 
 All the Pis start with the same little-internet image. I connect over Wi-Fi for SSH, leaving Ethernet for the experiments. I've named the two existing Pis `pi-foo-01` and `pi-foo-02`, and they start with their cables unplugged.
 
+I also prepare the switch's management interface: in its IP settings, I disable DHCP and set its address to `10.10.0.253`, with subnet mask `255.255.255.0`. That keeps it outside the `.1–.10` pool I'll use for the clients and separate from the DHCP server's `.254`. The switch doesn't need a management IP to carry Ethernet frames, but this gives me a predictable address for its settings.
+
 Said image prepared for this diary includes [`tsharkie`](../../tools/tsharkie/README.md), a little utility I made to make captures more readable. It also configures NetworkManager to use dhclient for DHCP. NetworkManager manages the interfaces throughout, and later, I'll configure the Pis to request particular addresses.
 
-Every packet excerpt below links to its saved capture, recorded on `eth0`. The frame numbers match those files, and the times are seconds since the first packet in each capture, rounded to three decimal places.
+Every packet excerpt below links to its saved capture, recorded on `eth0`. The frame numbers match those files, and the times are seconds since the first packet in each capture, rounded to three decimal places. These captures preserve earlier runs, including traffic from when the switch still used DHCP; the setup and reset instructions reflect what I learned while testing the walkthrough.
 
 ### Time to test the switch
 
@@ -51,7 +53,7 @@ I see the familiar flood of frames. There's mDNS! There's IPv6! Perhaps most imp
 
 But can they reach each other using the IPv4 addresses I want them to have?
 
-If I try to ping `pi-foo-02` from `pi-foo-01`, the result is _total packet loss_.
+If I try to ping `pi-foo-02` from `pi-foo-01`, the result is *total packet loss*.
 
 ```shell
 $ ping -c1 10.10.0.2
@@ -138,7 +140,7 @@ For the little internet, the DHCP server will hand out identities to individual 
 3. **R**equest: The Pi accepts the address.
 4. **A**cknowledge: The DHCP server confirms this and leases the IP address to the Pi.
 
-A **lease** assigns an IP address to a device for a configurable amount of time. If the assignments were permanent, then many DHCP servers would simply run out of IP addresses to hand out. A coffee shop certainly doesn't want to be figuring _that_ out while also trying to make a flat white.
+A **lease** assigns an IP address to a device for a configurable amount of time. If the assignments were permanent, then many DHCP servers would simply run out of IP addresses to hand out. A coffee shop certainly doesn't want to be figuring *that* out while also trying to make a flat white.
 
 Once DORA's wrapped up and the lease is given, the DHCP client on the Pi adds that address to its networking stack.
 
@@ -148,10 +150,10 @@ Exciting. What configuration will let `pi-foo-dhcp` serve as the DHCP server?
 
 ## A quick tour through dnsmasq configuration
 
-To start, before I even consider plugging this new Pi into the switch, I need to install dnsmasq and start the service.
+To start, before I even consider plugging this new Pi into the switch, I need to install dnsmasq (and neovim!) and start the service.
 
 ```
-sudo apt install dnsmasq
+sudo apt install dnsmasq neovim
 sudo service dnsmasq start
 ```
 
@@ -162,7 +164,7 @@ sudo nmcli connection delete eth
 sudo nmcli connection modify eth-dhcp connection.autoconnect yes
 ```
 
-Next, I want to capture the moment I get DHCP working. I'm watching for ARP, ICMP, and DHCP—the `udp and (port 67 or port 68)` bit selects DHCP traffic. I'm doing this on _all three Pis_.
+Next, I want to capture the moment I get DHCP working. I'm watching for ARP, ICMP, and DHCP—the `udp and (port 67 or port 68)` bit selects DHCP traffic. I'm doing this on *all three Pis*.
 
 ```
 $ tsharkie lesson-02_dhcp_$(hostname).pcapng -f 'arp or icmp or (udp and (port 67 or port 68))'
@@ -214,7 +216,7 @@ All I have to do now is ask `pi-foo-01` to try finding a DHCP server again, beca
 sudo nmcli --wait 0 connection up eth-dhcp
 ```
 
-Boom. _Magic_. Take a look at all that goodness [from pi-foo-01](evidence/captures/2026-09-09/pi-foo-01/lesson-02_dhcp_pi-foo-01.pcapng). The full file also preserves the earlier acquisition attempts.
+Boom. *Magic*. Take a look at all that goodness [from pi-foo-01](evidence/captures/2026-09-09/pi-foo-01/lesson-02_dhcp_pi-foo-01.pcapng). The full file also preserves the earlier acquisition attempts.
 
 ```
   51 |  457.648 | b8:27:eb:ba:c7:ba          | ff:ff:ff:ff:ff:ff          | ARP      | Who has 10.10.0.1? Tell 10.10.0.254
@@ -327,7 +329,7 @@ Is there anything that I can do about the IP addresses these devices get?
 
 ## You can just ask for what you want
 
-With DHCP, you have two ways of getting a specific IPv4 address: first, by the client _politely_ requesting it; and second, by configuring the DHCP server itself to associate specific MAC addresses with specific IPs. The former has to be polite, because the DHCP server gets the final say as to which addresses go where.
+With DHCP, you have two ways of getting a specific IPv4 address: first, by the client *politely* requesting it; and second, by configuring the DHCP server itself to associate specific MAC addresses with specific IPs. The former has to be polite, because the DHCP server gets the final say as to which addresses go where.
 
 Still, I'd like to have the Pis politely ask. Doing so requires a single line of configuration.
 
@@ -344,15 +346,9 @@ $ lease_uuid=$(nmcli -g connection.uuid connection show eth-dhcp)
 $ sudo rm -f "/var/lib/NetworkManager/dhclient-${lease_uuid}-eth0.lease"
 ```
 
-I also need to clean up dnsmasq on `pi-foo-dhcp`:
+I leave dnsmasq running and its lease records intact. Clearing the client's remembered lease lets it start a fresh exchange without making the server forget addresses other devices are still using.
 
-```
-sudo systemctl stop dnsmasq
-sudo truncate -s 0 /var/lib/misc/dnsmasq.leases
-sudo systemctl start dnsmasq
-```
-
-With everything reset, I can restart `tsharkie` on `pi-foo-02` and `pi-foo-dhcp`.
+With the client ready, I can restart `tsharkie` on `pi-foo-02` and `pi-foo-dhcp`.
 
 ```
 $ tsharkie lesson-02_nm-request_$(hostname).pcapng -f 'arp or icmp or (udp and (port 67 or port 68))'
@@ -408,25 +404,25 @@ $ tshark -n -r ~/cap/lesson-02_nm-request_pi-foo-02.pcapng \
           Requested IP Address: 10.10.0.2
 ```
 
-Yep. The Pi politely asks for `10.10.0.2`. In the frames that follow, the server offers it, the Pi requests it, and the server ACKs it. Amazing. Stunning. _Perfect_.
+Yep. The Pi politely asks for `10.10.0.2`. In the frames that follow, the server offers it, the Pi requests it, and the server ACKs it. Amazing. Stunning. *Perfect*.
 
 I can now give `pi-foo-01` the matching preference for `10.10.0.1`. Both Pis will ask for addresses that match their names, and the server will decide whether to grant them. Time to put the whole network back together and see it happen.
 
 ## Ready for an end-to-end rip?
 
-That begins by unplugging all the Ethernet cables and clearing the clients' leases. Their `.1` and `.2` preferences stay.
+That begins by unplugging all the Ethernet cables. Unplugging deactivates the clients' connections. On each client Pi, I clear its remembered Ethernet lease and re-enable automatic activation, keeping its `.1` or `.2` preference.
 
 ```shell
-$ sudo nmcli connection down eth-dhcp
+# on both pi-foo-01 and pi-foo-02, with Ethernet unplugged
 $ lease_uuid=$(nmcli -g connection.uuid connection show eth-dhcp)
 $ sudo rm -f "/var/lib/NetworkManager/dhclient-${lease_uuid}-eth0.lease"
+$ sudo nmcli connection modify eth-dhcp connection.autoconnect yes
 ```
 
-On `pi-foo-dhcp`, I stop `dnsmasq` and empty its lease file. Its configuration and the `10.10.0.254/24` address I added earlier stay in place.
+On `pi-foo-dhcp`, I stop `dnsmasq` until I'm ready to assemble the network. I keep its lease records, configuration, and the `10.10.0.254/24` address I added earlier in place.
 
 ```shell
 $ sudo systemctl stop dnsmasq
-$ sudo truncate -s 0 /var/lib/misc/dnsmasq.leases
 ```
 
 One final check to make sure that everything is down. Yep? Yep.
@@ -639,13 +635,13 @@ In frames 17–18, you see `pi-foo-dhcp` ACK-ing and handing out two leases.
 
 Roughly 5 seconds later, it sends ARP requests, but unlike many of these requests we've seen already, these go directly to the MAC addresses of the Pis instead of the broadcast. They both answer with the IPs they've just been given.
 
-This looks like Linux double-checking the ARP cache it already has. Handing out an IPv4 address and keeping track of it are _two different jobs_, and here I can see it all happening in the frames passing across the network.
+This looks like Linux double-checking the ARP cache it already has. Handing out an IPv4 address and keeping track of it are *two different jobs*, and here I can see it all happening in the frames passing across the network.
 
 Very cool.
 
-### The switch is a DHCP client, too
+### When the switch was a DHCP client, too
 
-I've neglected the switch a bit in this whole exercise, haven't I? Well, it turns out the switch wants an IPv4 address for its management interface, even though it doesn't need one to do the job of passing Ethernet frames around. In many of the captures, it's repeatedly asking to keep `10.10.0.12`.
+I've neglected the switch a bit in this whole exercise, haven't I? Before I gave its management interface the fixed `.253` address, it used DHCP. That's why the captures from that earlier run include the switch repeatedly asking to keep `10.10.0.12`. It wanted an address for its management interface, even though it didn't need one to pass Ethernet frames around.
 
 ```
    1 |    0.000 | 10.10.0.12                 | 255.255.255.255            | DHCP     | DHCP Request  - Transaction ID 0x3ddb
@@ -657,11 +653,9 @@ I've neglected the switch a bit in this whole exercise, haven't I? Well, it turn
    7 |   30.019 | 10.10.0.12                 | 255.255.255.255            | DHCP     | DHCP Request  - Transaction ID 0x3de1
 ```
 
-An earlier version of my DHCP configuration had set dnsmasq's `dhcp-range` from `.1-.50`, which could explain where it got `.12` from. I don't have a record of the original lease assignment, but this does definitively show that just because I reset all the Pis and their DHCP leases, I didn't reset _everything_ on the network.
+An earlier version of my DHCP configuration had set dnsmasq's `dhcp-range` from `.1-.50`, which could explain where it got `.12` from. I don't have a record of the original lease assignment, but this does definitively show that just because I reset all the Pis and their DHCP leases, I didn't reset *everything* on the network.
 
-Time will tell whether I can figure out how to reset the switch, too.
-
-Later, the server log records a fresh DORA for the switch, assigning it `.3`.
+Later in that earlier run, the server log recorded a fresh DORA for the switch, assigning it `.3`. With the fixed `.253` setup above, it no longer needs to ask this DHCP server for an address.
 
 ```
 Sep 09 21:58:49 pi-foo-dhcp dnsmasq-dhcp[26951]: DHCPDISCOVER(eth0) 3c:78:95:3e:f4:62
@@ -682,9 +676,9 @@ The answer is actually a **DHCP server**. I now know much more tangibly that a D
 
 What's become very clear to me now is that "it just works" is many frames, using many protocols, across many services. No single one of them carries the burden; only together, through all those questions asked and answers written down, does this intricate system work.
 
-And I can see it all happen in the packet capture _and_ the OLEDs. The little internet is starting to feel like a lot more than a tiny demo or silly art project.
+And I can see it all happen in the packet capture *and* the OLEDs. The little internet is starting to feel like a lot more than a tiny demo or silly art project.
 
-It would be tempting to lean into that energy and buy a _second_ switch, plus a handful more Pis, and really
+It would be tempting to lean into that energy and buy a *second* switch, plus a handful more Pis, and really
 start to make this one minuscule network part of something much larger. I really do want to know what happens when a packet from
 `pi-foo-01` doesn't just stop at the local network.
 
@@ -695,14 +689,14 @@ practical to utterly ridiculous:
 
 - **What else can I visualize on the OLEDs?** Maybe what happens when two DHCP clients ask for the same IP address?
 - **How does the switch actually decide which port to send frames to?** Now that the
-  switch sits on `10.10.0.3`, I can answer that with port mirroring.
+switch sits on `10.10.0.253`, I can answer that with port mirroring.
 - **What happens if I plug the switch into itself?** Endless recursion?
 - **What happens if there are two DHCP servers on the same local network?**
-  Apparently, this is a real thing that happens on occasion and I'd love to know
-  what the packet chatter looks like.
+Apparently, this is a real thing that happens on occasion and I'd love to know
+what the packet chatter looks like.
 - **How many feet of Ethernet cable before it fails?** I've heard that's around
-  300 feet, but I have the perfect testbed in which to see _exactly_ where... or
-  at least to the nearest multiple of 50 (feet).
+300 feet, but I have the perfect testbed in which to see *exactly* where... or
+at least to the nearest multiple of 50 (feet).
 
 Have ideas of your own? Drop an
 [issue](https://github.com/ngrok/little-internet/issues) or an

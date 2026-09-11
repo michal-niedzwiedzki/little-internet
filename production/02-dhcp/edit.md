@@ -5,6 +5,24 @@ supporting work are committed and pushed; publication review and video
 preparation are next. Old-cut transcript and sampled-picture review are complete,
 but continuous playback/listening remain pending. No Resolve timeline edited.
 
+## Latest checkpoint — coached reset recovery and diary corrections
+
+Joel diagnosed and recovered two issues: NetworkManager did not automatically
+reactivate profiles after connection down, and the switch and Pi 02 both
+claimed .2 after server lease records had been cleared. Explicit activation
+restored DHCP; moving the switch to .253 removed the observed conflict, and
+ping succeeded. Individual client resets with Ethernet unplugged, client-only
+lease deletion, and an autoconnect profile update then produced cable-triggered
+DORA for .1 and .2 while preserving the server's records.
+
+The observations and raw excerpts are in [fresh-image-test.md](fresh-image-test.md).
+At Joel's request, the diary now incorporates the corrected reset, preserves
+server leases, and sets aside .253 for switch management. Original captures
+remain intact and earlier switch DHCP behavior is identified as historical.
+Next verification: arbitrary lease to newly requested preferred address with
+server records retained. New recovery captures still need filenames and
+archiving. No image PR, hardware, merge, or tag changes were made in this edit.
+
 ## Latest checkpoint — candidate ready for hardware testing
 
 PR #24's image build completed successfully. The artifact is
