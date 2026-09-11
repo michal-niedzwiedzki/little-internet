@@ -151,7 +151,11 @@ Replace any existing unconditional `send dhcp-requested-address` line.
 Keep that preference out of global `/etc/dhcp/dhclient.conf`, where it could
 also affect management Wi-Fi. The server decides whether to grant a requested
 address; an existing lease does not change merely because this file is edited.
-Client/server lease preparation and a new capture are part of that experiment.
+The server can still offer the client's existing lease. To test a change, first
+deactivate the client, then release only its old binding on the dnsmasq server
+with `dhcp_release` from `dnsmasq-utils`, using the address and MAC in that lease
+record. Clear the client's remembered lease before reactivating it for a new
+Discover exchange. Keep other clients' server records intact.
 
 ### Live capture viewer
 
