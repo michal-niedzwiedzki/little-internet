@@ -1,0 +1,27 @@
+[
+  {
+    "url": "https://downloads.isc.org/isc/dhcp/4.4.3-P1/dhcp-4.4.3-P1.tar.gz",
+    "sha256": "0ac416bb55997ca8632174fd10737fd61cdb8dba2752160a335775bc21dc73c7",
+    "bytes": 10081055
+  },
+  {
+    "url": "https://deb.debian.org/debian/pool/main/i/isc-dhcp/isc-dhcp_4.4.3-P1-2.debian.tar.xz",
+    "sha256": "3833c1a703795b04a4b118e9686b0be6885ed02980076b9c8ee3674940cc98bf",
+    "bytes": 100224
+  },
+  {
+    "url": "https://thekelleys.org.uk/dnsmasq/dnsmasq-2.90.tar.xz",
+    "sha256": "8e50309bd837bfec9649a812e066c09b6988b73d749b7d293c06c57d46a109e4",
+    "bytes": 570672
+  },
+  {
+    "url": "https://deb.debian.org/debian/pool/main/d/dnsmasq/dnsmasq_2.90-4~deb12u2.debian.tar.xz",
+    "sha256": "f30e80854745f495b6c1de09502b50c3a5fb4d078b6e651970bf46220de84648",
+    "bytes": 34396
+  },
+  {
+    "url": "https://raw.githubusercontent.com/NetworkManager/NetworkManager/1.42.4/src/core/dhcp/nm-dhcp-dhclient-utils.c",
+    "sha256": "a159edbedf47782ed7e66086bab37d55b6895ff970f8ff5ab6d038ed3dbb1bf2",
+    "bytes": 25464
+  }
+]

@@ -1,0 +1,26 @@
+$ ssh pi@pi-foo-02.local 'dpkg-query -W isc-dhcp-client network-manager; cat /etc/NetworkManager/dhclient-eth0.conf /etc/NetworkManager/conf.d/20-little-internet-dhcp-client.conf; sudo cat /var/lib/NetworkManager/dhclient-eth0.conf'
+
+isc-dhcp-client	4.4.3-P1-2
+network-manager	1.42.4-1+rpt1+deb12u1
+send dhcp-requested-address 10.10.0.2;
+# NetworkManager owns the interfaces and launches dhclient for DHCP.
+# Keep lesson-specific requests in /etc/NetworkManager/dhclient-eth0.conf.
+[main]
+dhcp=dhclient
+# Created by NetworkManager
+# Merged from /etc/NetworkManager/dhclient-eth0.conf
+
+send dhcp-requested-address 10.10.0.2;
+send host-name "pi-foo-02"; # added by NetworkManager
+
+option rfc3442-classless-static-routes code 121 = array of unsigned integer 8;
+option ms-classless-static-routes code 249 = array of unsigned integer 8;
+option wpad code 252 = string;
+
+also request rfc3442-classless-static-routes;
+also request ms-classless-static-routes;
+also request static-routes;
+also request wpad;
+also request ntp-servers;
+also request root-path;
+

@@ -364,3 +364,19 @@ Offer as .8. The earlier suggestion to simply change that description was too
 broad. Explain the alternative with this separate capture, or deliberately
 replace the example and all matching references together. No diary text was
 changed while archiving this test.
+
+
+### Interpretation corrected after source investigation — 2026-09-11
+
+The controlled transition's packet observations and final state remain valid.
+However, the unconditional `send dhcp-requested-address` configuration overrides
+the address selected from the Offer when dhclient constructs Request. dnsmasq
+accepted the different requested address. This is not the standard SELECTING
+behavior, so the successful test does not validate the recipe as a gentle
+Discover preference. The proposed diary addition should not be used as written.
+
+The [investigation report](evidence/2026-09-11-preference-investigation/README.md)
+records source-backed causation and a Discover-only candidate that remains
+untested. Runtime checks were read-only. A test that demonstrates honoring the
+server's different Offer, followed by a properly prepared successful preference
+case and ordinary renewal, remains before publishing a replacement recipe.

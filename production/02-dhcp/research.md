@@ -7,6 +7,29 @@ automated audio transcript and sampled picture have now been inspected;
 listening and continuous playback remain pending. Historical interpretations
 still need checking.
 
+## Preference override correction — 2026-09-11
+
+The mismatched Offer/Request is explained by the unconditional
+`send dhcp-requested-address` line recommended for B07. ISC dhclient constructs
+its Request using the selected Offer, then executes the configured `send`,
+which replaces option 50. dnsmasq accepts the different requested address in
+this tested setup. That successful outcome does not make it the standard
+SELECTING exchange: RFC 2131 requires Request to select the offered address.
+
+See the [investigation](evidence/2026-09-11-preference-investigation/README.md)
+for read-only runtime evidence, exact packet fields, version-matched source
+analysis, primary sources, and an untested Discover-only configuration candidate.
+The initial client-preference recommendation missed this override. Do not
+publish the proposed B07 paragraph as an ordinary negotiation variant, or treat
+the successful transition as validation of the preference recipe's semantics.
+
+Next: test a Discover-only hint that leaves Request and renewal to dhclient.
+With the server retaining .8, it should be allowed to offer .8 and the client
+should accept .8. Demonstrating a subsequent grant of .2 needs separate,
+verified per-client lease preparation. The image does not bake in the address
+preference; B07 and the image README example need correction after testing.
+No hardware configuration, diary, or image PR was changed in this investigation.
+
 ## Publication baseline decision — 2026-09-10
 
 Joel will publish a new image alongside the standalone diary, with tsharkie

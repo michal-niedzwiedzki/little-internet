@@ -5,6 +5,24 @@ supporting work are committed and pushed; publication review and video
 preparation are next. Old-cut transcript and sampled-picture review are complete,
 but continuous playback/listening remain pending. No Resolve timeline edited.
 
+## Latest checkpoint — preference override cause identified
+
+Read-only runtime inspection and version-matched source analysis establish why
+the client Requested .2 after an Offer of .8: our unconditional `send` statement
+overwrites dhclient's normally selected address. dnsmasq accepts it, but this
+Request differs from the RFC's required SELECTING behavior. The earlier proposed
+B07 addition should not describe it as an ordinary DHCP negotiation variant.
+See [research.md](research.md#preference-override-correction--2026-09-11) and the
+[full investigation](evidence/2026-09-11-preference-investigation/README.md).
+
+Next: coach a test of the source-reviewed Discover-only candidate when Joel
+returns. It is not hardware-validated or installed. With an existing .8 binding,
+expect the server to offer .8 and the client to Request/accept .8 despite its
+initial .2 hint. A later grant of .2 needs controlled per-client preparation.
+Validate renewal too before changing B07/image README and refreshing PR #24.
+The image does not bake in these address preferences. Hardware state, diary,
+and image PR were unchanged during the investigation.
+
 ## Latest checkpoint — controlled preference transition verified
 
 The follow-up test succeeded on the existing Pi 02: .2 → .8 → .2, with full

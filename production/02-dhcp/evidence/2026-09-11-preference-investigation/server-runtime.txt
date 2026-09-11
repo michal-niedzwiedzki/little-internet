@@ -1,0 +1,6 @@
+$ ssh pi@pi-foo-dhcp.local "dpkg-query -W dnsmasq dnsmasq-base; sed '/^[[:space:]]*#/d; /^[[:space:]]*$/d' /etc/dnsmasq.conf"
+
+dnsmasq	2.90-4~deb12u2
+dnsmasq-base	2.90-4~deb12u2
+interface=eth0
+dhcp-range=10.10.0.1,10.10.0.10,12h

@@ -105,3 +105,9 @@ contents stayed unchanged: dnsmasq updated its lease records during the test.
 This demonstrates the behavior of this configured client/server combination;
 it is not a general claim that clients always request a different address from
 the Offer or that a server must honor a preference.
+
+
+Interpretation update: [source investigation](../../../evidence/2026-09-11-preference-investigation/README.md)
+traced the differing Request to the unconditional dhclient `send` configuration.
+The assignments above succeeded, but this is not the standard SELECTING
+exchange. Do not present it as ordinary client preference negotiation.
