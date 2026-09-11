@@ -5,6 +5,22 @@ supporting work are committed and pushed; publication review and video
 preparation are next. Old-cut transcript and sampled-picture review are complete,
 but continuous playback/listening remain pending. No Resolve timeline edited.
 
+## Latest checkpoint — conditional preference fallback passed
+
+Joel authorized an agent-run test on Pi 02. The conditional Discover-only hint
+successfully suggested occupied .1 while allowing Request to accept the server's
+.2 Offer. Restored the preference to conditional .2 and verified another full
+DORA, one .2/24 client address, and matching server records. Two nine-frame
+captures and raw command transcripts are saved in
+[the experiment archive](evidence/2026-09-11-conditional-preference/README.md).
+Pi 02 now runs the conditional .2 config; Pi 01's config was not changed.
+
+Next: validate timed renewal and a newly preferred assignment without an old
+server binding, then update B07/image README and the PR with matching evidence.
+The .2 restoration test reacquired .2; it is not proof of a conditional .8-to-.2
+transition. No diary/image/PR edit or switch/server configuration change was
+made in this hardware test.
+
 ## Latest checkpoint — preference override cause identified
 
 Read-only runtime inspection and version-matched source analysis establish why

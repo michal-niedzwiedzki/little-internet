@@ -1,0 +1,27 @@
+{
+  "copied_on": "2026-09-11",
+  "files": [
+    {
+      "host": "pi-foo-02",
+      "source": "/home/pi/cap/lesson-02-conditional-preference-conflict_pi-foo-02.pcapng",
+      "local": "lesson-02-conditional-preference-conflict_pi-foo-02.pcapng",
+      "sha256": "848363376b46294dd6028b9856d4d371d1e355d3df22c414917864dea9434e51",
+      "remote_before_sha256": "848363376b46294dd6028b9856d4d371d1e355d3df22c414917864dea9434e51",
+      "remote_after_sha256": "848363376b46294dd6028b9856d4d371d1e355d3df22c414917864dea9434e51",
+      "bytes": 2264,
+      "frames": 9,
+      "decoded": "lesson-02-conditional-preference-conflict_pi-foo-02.tsv"
+    },
+    {
+      "host": "pi-foo-02",
+      "source": "/home/pi/cap/lesson-02-conditional-preference-restored_pi-foo-02.pcapng",
+      "local": "lesson-02-conditional-preference-restored_pi-foo-02.pcapng",
+      "sha256": "5870377a6eb2b851229e8b334d46a483e34cab14ce061e8bc2d3fe5fd2af041c",
+      "remote_before_sha256": "5870377a6eb2b851229e8b334d46a483e34cab14ce061e8bc2d3fe5fd2af041c",
+      "remote_after_sha256": "5870377a6eb2b851229e8b334d46a483e34cab14ce061e8bc2d3fe5fd2af041c",
+      "bytes": 2264,
+      "frames": 9,
+      "decoded": "lesson-02-conditional-preference-restored_pi-foo-02.tsv"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+$ ssh pi@pi-foo-dhcp.local 'sudo cat /var/lib/misc/dnsmasq.leases'
+
+1789201574 b8:27:eb:7d:e8:ee 10.10.0.2 pi-foo-02 *
+1789192637 b8:27:eb:3a:e2:c8 10.10.0.1 pi-foo-01 *

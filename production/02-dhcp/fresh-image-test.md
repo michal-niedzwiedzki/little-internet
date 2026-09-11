@@ -380,3 +380,19 @@ records source-backed causation and a Discover-only candidate that remains
 untested. Runtime checks were read-only. A test that demonstrates honoring the
 server's different Offer, followed by a properly prepared successful preference
 case and ordinary renewal, remains before publishing a replacement recipe.
+
+
+### Conditional preference tested by agent — 2026-09-11
+
+At Joel's explicit request, tested the candidate on Pi 02. With Pi 01 holding
+.1 and Pi 02 holding .2, configured a Discover-only .1 hint. Captured full DORA:
+Discover asks .1, Offer gives .2, Request selects .2, ACK grants .2. This proves
+fallback to the server's different Offer with the conditional setting.
+
+Restored the conditional preference to .2 and captured another successful full
+DORA. Pi 02 ended with one .2/24 address; the server records .2 for Pi 02 and
+.1 for Pi 01. Both captures have nine frames and were copied/hash-verified.
+See [raw transcripts and captures](evidence/2026-09-11-conditional-preference/README.md).
+Pi 02 now has the conditional config installed. Pi 01 was not reconfigured.
+Timed renewal and a new preferred assignment without a prior server binding
+remain untested. No diary/image/PR edits accompanied this hardware test.

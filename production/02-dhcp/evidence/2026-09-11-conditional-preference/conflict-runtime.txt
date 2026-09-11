@@ -1,0 +1,42 @@
+$ sudo nmcli -w 15 connection down eth-dhcp
+Connection 'eth-dhcp' successfully deactivated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/18)
+
+$ sudo rm -f /var/lib/NetworkManager/dhclient-ea4302a7-a8e0-43f3-8aae-d9bb45eed4db-eth0.lease
+
+$ sudo nmcli -w 20 connection up eth-dhcp
+Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/19)
+
+$ sudo cat /var/lib/NetworkManager/dhclient-eth0.conf
+# Created by NetworkManager
+# Merged from /etc/NetworkManager/dhclient-eth0.conf
+
+on transmission {
+if config-option dhcp-message-type = 01 {
+send dhcp-requested-address 10.10.0.1;
+}
+}
+send host-name "pi-foo-02"; # added by NetworkManager
+
+option rfc3442-classless-static-routes code 121 = array of unsigned integer 8;
+option ms-classless-static-routes code 249 = array of unsigned integer 8;
+option wpad code 252 = string;
+
+also request rfc3442-classless-static-routes;
+also request ms-classless-static-routes;
+also request static-routes;
+also request wpad;
+also request ntp-servers;
+also request root-path;
+
+
+$ ip -4 addr show dev eth0
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    inet 10.10.0.2/24 brd 10.10.0.255 scope global dynamic noprefixroute eth0
+       valid_lft 43200sec preferred_lft 43200sec
+
+$ tshark -n -r /home/pi/cap/lesson-02-conditional-preference-conflict_pi-foo-02.pcapng -Y dhcp -T fields -E header=y -e frame.number -e dhcp.option.dhcp -e dhcp.ip.your -e dhcp.option.requested_ip_address -e dhcp.option.dhcp_server_id
+frame.number	dhcp.option.dhcp	dhcp.ip.your	dhcp.option.requested_ip_address	dhcp.option.dhcp_server_id
+1	1	0.0.0.0	10.10.0.1	
+2	2	10.10.0.2		10.10.0.254
+3	3	0.0.0.0	10.10.0.2	10.10.0.254
+4	5	10.10.0.2		10.10.0.254

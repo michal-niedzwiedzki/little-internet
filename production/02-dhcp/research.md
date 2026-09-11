@@ -7,6 +7,18 @@ automated audio transcript and sampled picture have now been inspected;
 listening and continuous playback remain pending. Historical interpretations
 still need checking.
 
+## Conditional preference fallback verified — 2026-09-11
+
+The agent tested the candidate on Pi 02 with Joel's explicit authorization.
+Discover suggested occupied .1, the server offered .2, and Request correctly
+selected .2 before ACK. A second exchange after restoring the conditional .2
+hint also succeeded. Pi 02 now has that final configuration installed; Pi 01's
+configuration was not changed. See the
+[experiment](evidence/2026-09-11-conditional-preference/README.md) for raw output,
+captures, final state, and limits. This supersedes the candidate's untested
+status below for initial DORA/fallback only. Timed renewal and a new preferred
+assignment without a prior binding remain to validate before publication.
+
 ## Preference override correction — 2026-09-11
 
 The mismatched Offer/Request is explained by the unconditional
