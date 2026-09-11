@@ -76,8 +76,8 @@ whatever question hooks you:
 ├── lessons/      One directory per lesson: an explainer, the scripts to run
 │                 it yourself, and recorded packet captures. Start with
 │                 lessons/00.
-├── tools/        Small scripts that run on a node: OLED smoke tests, the
-│                 boot-time status display, the ARP-state viewer.
+├── tools/        Workstation SSH reset, plus node tools: OLED smoke tests,
+│                 the boot-time status display, and the ARP-state viewer.
 ├── hardware/     Things you make: 3D-printable models for mounting the kit.
 │                 See hardware/pi3-oled-case for the Pi 3 half-case with an
 │                 integrated OLED stand.

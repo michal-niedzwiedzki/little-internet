@@ -89,6 +89,10 @@ file in place so you can fix it and reboot.
   once and key-based auth takes over: `ssh-copy-id pi@<hostname>.local` (enter
   the password one last time). After that, `ssh pi@<hostname>.local` logs in
   with no prompt.
+- Reflashed your lab Pis? Run `./tools/reset-ssh.sh` from the repo root on your
+  workstation to refresh saved host keys and copy your public key to all three
+  nodes. See [the SSH reset utility](../tools/README.md#restore-ssh-after-reflashing)
+  for defaults, custom hosts, and a dry run.
 - Confirm the networking tools are present: `which tcpdump tshark arping`.
 - Check the I2C bus (for the OLED): `i2cdetect -y 1`.
 - If an OLED is wired up, it shows the node's identity from boot — hostname in
