@@ -5,6 +5,34 @@ supporting work are committed and pushed; publication review and video
 preparation are next. Old-cut transcript and sampled-picture review are complete,
 but continuous playback/listening remain pending. No Resolve timeline edited.
 
+## Server address persistence correction — 2026-09-13
+
+Read-only SSH inspection found all three Pis booted at 06:11 on September 13,
+with eth0 LOWER_UP and no Ethernet IPv4 address. All were trying eth-dhcp.
+On the server, dnsmasq was active, but eth-dhcp still had ipv4.method auto and
+no saved address. A contiguous server journal excerpt ended with:
+
+```text
+Sep 13 06:47:47 pi-foo-dhcp dnsmasq-dhcp[572]: DHCP packet received on eth0 which has no address
+Sep 13 06:47:48 pi-foo-dhcp dnsmasq-dhcp[572]: DHCP packet received on eth0 which has no address
+Sep 13 06:47:50 pi-foo-dhcp dnsmasq-dhcp[572]: DHCP packet received on eth0 which has no address
+```
+
+The temporary address from the earlier experiment did not survive reboot.
+Updated the working diary and public PR #25 to modify the existing server
+eth-dhcp profile into eth-server, with manual .254/24, autoconnect enabled,
+and never-default enabled. Client profiles remain DHCP. Historical captures
+and server logs retain the original temporary-address experiment; the saved
+NetworkManager configuration has not yet been activated or reboot-tested here.
+No live configuration was changed during this inspection.
+
+NetworkManager documents saved connection profiles and their activation in
+[the nmcli reference](https://networkmanager.dev/docs/api/latest/nmcli.html).
+The earlier publication assessment missed this persistence gap. Next: apply
+the two documented nmcli commands on pi-foo-dhcp, confirm .254, then observe
+client acquisition; explicitly reactivate a client if its retries have stopped.
+Do not reset leases merely to recover connectivity.
+
 ## Publication checkpoint — 2026-09-11
 
 Draft [diary PR #25](https://github.com/ngrok/little-internet/pull/25) is open
