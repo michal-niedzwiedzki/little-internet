@@ -206,9 +206,19 @@ Sep 09 17:14:48 pi-foo-dhcp dnsmasq[13798]: warning: interface eth0 does not cur
 
 I'd configured dnsmasq to hand out IP addresses on an interface, but maybe it needs an IP address of its own to do so? I give the server `10.10.0.254/24`, which is an address on the same subnet as the clients, but outside the `.1-.10` pool it can hand out.
 
+On `pi-foo-dhcp`, I turn the existing Ethernet profile into a static server profile and rename it `eth-server`:
+
+```shell
+sudo nmcli connection modify eth-dhcp \
+  connection.id eth-server \
+  connection.autoconnect yes \
+  ipv4.method manual \
+  ipv4.addresses 10.10.0.254/24 \
+  ipv4.never-default yes
+sudo nmcli connection up eth-server
 ```
-sudo ip addr add 10.10.0.254/24 dev eth0
-```
+
+NetworkManager saves this address and restores it when Ethernet connects after a reboot. The clients still use DHCP, but the server now has its own fixed address. `ipv4.never-default yes` keeps this lab connection from becoming the server's default route.
 
 All I have to do now is ask `pi-foo-01` to try finding a DHCP server again, because by now, it's given up.
 
@@ -438,7 +448,7 @@ $ sudo rm -f "/var/lib/NetworkManager/dhclient-${lease_uuid}-eth0.lease"
 $ sudo nmcli connection modify eth-dhcp connection.autoconnect yes
 ```
 
-On `pi-foo-dhcp`, I stop `dnsmasq` until I'm ready to assemble the network. I keep its lease records, configuration, and the `10.10.0.254/24` address I added earlier in place.
+On `pi-foo-dhcp`, I stop `dnsmasq` until I'm ready to assemble the network. I keep its lease records, configuration, and the `eth-server` profile with its `10.10.0.254/24` address in place.
 
 ```shell
 $ sudo systemctl stop dnsmasq
