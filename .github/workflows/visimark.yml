@@ -1,0 +1,12 @@
+name: visimark
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: michal-niedzwiedzki/visimark@v0.1.2
+        with:
+          files: "BOM.md"

@@ -11,10 +11,16 @@ builds on the one before it.
 | TP-Link TL-SG108E 8-port managed switch                             | 1   | $30   | $30       | Amazon                   |
 | SanDisk Ultra 16GB microSD, A1-rated                                | 3   | $12   | $36       | Amazon (sold by SanDisk) |
 | Official Raspberry Pi 12.5W micro-USB PSU                           | 2   | $8    | $16       | Adafruit / PiShop        |
-| Monoprice SlimRun Cat6A 1ft (single color)                          | 5   | $2.50 | $12       | Monoprice                |
+| Monoprice SlimRun Cat6A 1ft (single color)                          | 5   | $2.50 | $12.50    | Monoprice                |
 | ELEGOO SSD1306 128×64 OLED, 0.96" I2C (4-pin, 3-pack, no soldering) | 1   | $12   | $12       | Amazon (sold by ELEGOO)  |
 | Female-to-female jumper wires (40-pack)                             | 1   | $4    | $4        | Adafruit / Amazon        |
-| **Phase 1 total**                                                   |     |       | **~$180** |                          |
+
+```vmark #phase1
+Subtotal = ROUND(Qty * Unit, 2)
+total = SUM(Subtotal)
+```
+
+Phase 1 total: **$180.50**<!--vmark=phase1.total-->
 
 Got a 3D printer? [`hardware/pi3-oled-case/`](./hardware/pi3-oled-case/) holds a
 printable half-case that the Pi drops into, with a stand that holds the OLED up
