@@ -1,10 +1,10 @@
-# DHCP diary captures
+# DHCP build log captures
 
-These are the original captures linked from [Diary 01](../../01_who-hands-out-addresses.md), copied without modification. Original `lesson-02` filenames are retained so saved commands, frame numbers, and evidence remain consistent. Every capture here was recorded on `eth0`.
+These are the original captures linked from [Build log 02](../../02_who-hands-out-addresses.md), copied without modification. Original `lesson-02` filenames are retained so saved commands, frame numbers, and evidence remain consistent. Every capture here was recorded on `eth0`.
 
 Open a `.pcapng` file in Wireshark, or read it with `tshark -r FILE.pcapng`. Frame numbers refer to that file; relative times are seconds from its first packet. The TSV contains decoded DHCP fields for the preference transition. [Server log excerpts](server-log.md) preserve the address-assignment diagnostic and subsequent DORA exchange.
 
-The September 9 captures retain historical switch DHCP traffic. The diary’s setup instructions reflect the later correction to use a static management address outside the client pool. The preference-transition captures are from the September 11 verification of the final conditional configuration.
+The September 9 captures retain historical switch DHCP traffic. The build log’s setup instructions reflect the later correction to use a static management address outside the client pool. The preference-transition captures are from the September 11 verification of the final conditional configuration.
 
 | File | Recorded |
 | --- | --- |
